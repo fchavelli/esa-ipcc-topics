@@ -17,12 +17,15 @@ def convert_pdf_folder_to_txt(source_folder, target_folder):
         # Initialize a PDF reader and open the source PDF file
         reader = PdfReader(source_path)
         
-        # Extract text from each page and write to a new txt file
-        with open(target_path, 'w') as txt_file:
+        # Extract text from each page and attempt to write to a new txt file
+        with open(target_path, 'w', encoding='utf-8') as txt_file:
             for page in reader.pages:
-                text = page.extract_text()
-                if text:
-                    txt_file.write(text)
+                try:
+                    text = page.extract_text()
+                    if text:
+                        txt_file.write(text)
+                except UnicodeEncodeError as e:
+                    print(f"Encoding error encountered and skipped in {pdf_file}: {e}")
         
         # Display progress
         print(f"Converted ({i+1}/{len(pdf_files)}): {pdf_file} to txt")
