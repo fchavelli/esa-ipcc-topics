@@ -7,7 +7,7 @@ import os
 
 # Create downloads directories if they don't exist
 download_folder = 'data/ipcc'
-folders = ['data/ipcc/reports/pdf', 'data/ipcc/citations']
+folders = ['data/ipcc/reports/pdf', 'data/ipcc/references']
 for folder in folders:
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -35,5 +35,5 @@ for i in range(1, 4):
         filename = os.path.join(download_folder, f"reports/pdf/wg{i}_ch{j}.pdf")
         download_file(chapter_url, filename)
         reference_url = f"https://www.ipcc.ch/report/ar6/wg{i}/downloads/report/IPCC_AR6_WG{i*"I"}_References_Chapter{j_formatted}.bib"
-        filename = os.path.join(download_folder, f"citations/wg{i}_ch{j}.bib")
+        filename = os.path.join(download_folder, f"references/wg{i}_ch{j}.bib")
         download_file(reference_url, filename)

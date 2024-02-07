@@ -23,6 +23,18 @@ pip install -r requirements.txt
 
 ## Data
 
+Data is organized as follows:
+
+```
+\data
+    \ipcc
+        \reports
+            \pdf        [report files in .pdf format]
+            \txt        [report files in .txt format]
+        \references     [references in .bib format]
+    \esa
+```
+
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
 AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
 
