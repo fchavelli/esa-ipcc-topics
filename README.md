@@ -46,3 +46,10 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 
 ```bash
 ./scripts/run_conversion.sh data/reports/pdf data/reports/txt
+```
+
+Download the CCI references (.bib) or build a new bibliography from an raw Excel file (containing at least reference titles) using the following command.
+
+```python
+python get_bib.py
+```
