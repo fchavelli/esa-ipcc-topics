@@ -5,7 +5,7 @@ Analysis of ESA Climate Office topics across last IPCC reports
 
 Create a python virtual environment and install the dependencies.
 
-Using PowerShell
+PowerShell
 
 ```PowerShell
 python -m venv env
@@ -13,7 +13,7 @@ python -m venv env
 pip install -r requirements.txt
 ```
 
-Using bash
+bash
 
 ```bash
 python3 -m venv env
@@ -27,12 +27,10 @@ Data is organized as follows:
 
 ```
 \data
-    \ipcc
-        \reports
-            \pdf        [report files in .pdf format]
-            \txt        [report files in .txt format]
-        \references     [references in .bib format]
-    \esa
+    \reports
+        \pdf        [ipcc report files in .pdf format]
+        \txt        [ipcc report files in .txt format]
+    \references     [ipcc references in .bib format]
 ```
 
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
@@ -47,4 +45,4 @@ Other files including Special Reports and Synthesis Report chapters, SPMs, TSs a
 Once pdf files are downloaded, they can be converted to txt files using the following command.
 
 ```bash
-./scripts/run_conversion.sh data/ipcc/reports/pdf data/ipcc/reports/txt
+./scripts/run_conversion.sh data/reports/pdf data/reports/txt

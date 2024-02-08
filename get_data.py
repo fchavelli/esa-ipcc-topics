@@ -6,8 +6,8 @@ import requests
 import os
 
 # Create downloads directories if they don't exist
-download_folder = 'data/ipcc'
-folders = ['data/ipcc/reports/pdf', 'data/ipcc/references']
+download_folder = 'data'
+folders = ['data/reports/pdf', 'data/references']
 for folder in folders:
     if not os.path.exists(folder):
         os.makedirs(folder)
