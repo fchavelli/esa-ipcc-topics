@@ -48,7 +48,7 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 ./scripts/run_conversion.sh data/reports/pdf data/reports/txt
 ```
 
-Download the CCI references (.bib) or build a new bibliography from an raw Excel file (containing at least reference titles) using the following command.
+Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online.
 
 ```python
 python get_bib.py
