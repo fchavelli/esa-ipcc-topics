@@ -5,9 +5,9 @@ Analysis of ESA Climate Office topics across last IPCC reports
 
 Create a python virtual environment and install the dependencies.
 
-PowerShell
+shell
 
-```PowerShell
+```shell
 python -m venv env
 .\env\Scripts\Activate
 pip install -r requirements.txt
@@ -48,8 +48,9 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 ./scripts/run_conversion.sh data/reports/pdf data/reports/txt
 ```
 
-Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online.
+Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Then optionally remove any duplicates from the bib file.
 
 ```python
 python get_bib.py
+python remove_duplicates.py
 ```
