@@ -19,34 +19,6 @@
 # The Excel file should have at least two columns: "Project" and "Reference".
 # The path to this file must be updated by the user.
 
-# Initialize the BibTeX writer and an empty list to store the BibTeX entries.
-
-# Iterate through each row in the DataFrame loaded from the Excel file.
-# For each row, encode the reference for use in a URL and construct the request URL
-# to the CrossRef API including parameters for selecting relevant information.
-
-# Make the HTTP request to the CrossRef API for each encoded reference.
-# If the response is successful (HTTP status code 200), parse the JSON data.
-
-# Check if the response contains items (i.e., documents matching the query).
-# If so, extract the necessary information from the first item in the response,
-# such as title, DOI, publication year, authors, journal, volume, pages, and number.
-# Format author names as needed and handle missing information gracefully.
-
-# Determine the BibTeX entry type based on the document type returned by CrossRef,
-# using the predefined mapping. Default to 'misc' if the document type is not in the mapping.
-
-# Construct a BibTeX entry for each document, ensuring all fields are converted to strings
-# to avoid type errors. Add the project information from the Excel file to each entry.
-
-# Append each BibTeX entry to the list of entries.
-
-# After processing all rows, add the entries to a BibTeX database and write the database
-# to a .bib file using the BibTeX writer. This results in a BibTeX file named 'output.bib'
-# containing all the generated entries.
-
-# Print a message indicating that the BibTeX file has been created successfully.
-
 import pandas as pd
 import requests
 from urllib.parse import quote
