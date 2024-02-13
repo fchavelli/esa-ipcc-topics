@@ -1,3 +1,5 @@
 env/
-data/
+data/cci/
+data/references/
+data/reports/
 __pycache__/

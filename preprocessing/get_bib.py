@@ -25,67 +25,6 @@ from urllib.parse import quote
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 import re
-from difflib import SequenceMatcher
-
-def preprocess_text(text):
-    """
-    Preprocesses text by removing special characters, digits, converting to lowercase, 
-    and stripping whitespace.
-    
-    Parameters:
-    - text: The text to preprocess.
-    
-    Returns:
-    - The preprocessed text.
-    """
-    return re.sub(r'[\W\d]+', ' ', text).lower().strip()
-
-def are_titles_similar(title1, title2, threshold=0.8):
-    """
-    Checks if two titles are similar based on a given threshold.
-    
-    Parameters:
-    - title1: The first title to compare.
-    - title2: The second title to compare.
-    - threshold: The similarity threshold. Titles are considered similar if their similarity
-      ratio is above this threshold.
-    
-    Returns:
-    - A boolean indicating whether the titles are considered similar.
-    - The similarity ratio.
-    """
-    title1_processed = preprocess_text(title1)
-    title2_processed = preprocess_text(title2)
-    
-    ratio = SequenceMatcher(None, title1_processed, title2_processed).ratio()
-    return ratio > threshold, ratio
-
-def is_subsequence(possible_subseq, text, threshold=0.5):
-    """
-    Checks if the preprocessed possible_subseq is likely to be a subsequence of the preprocessed text,
-    based on the length of the longest common matching block.
-    
-    Parameters:
-    - possible_subseq: The text to check as a possible subsequence.
-    - text: The text to check within.
-    - threshold: The ratio of the longest common matching block to the length of possible_subseq
-      required to consider possible_subseq a subsequence of text.
-    
-    Returns:
-    - A boolean indicating whether possible_subseq is considered a subsequence of text.
-    - The similarity ratio based on the longest common matching block.
-    """
-    possible_subseq_processed = preprocess_text(possible_subseq)
-    text_processed = preprocess_text(text)
-    
-    matcher = SequenceMatcher(None, possible_subseq_processed, text_processed)
-    match = matcher.find_longest_match(0, len(possible_subseq_processed), 0, len(text_processed))
-    
-    if len(possible_subseq_processed) == 0:
-        return False, 0  # Avoid division by zero
-
-    ratio = match.size / len(possible_subseq_processed)
-    return ratio >= threshold, ratio
 
 # Load the Excel file
 excel_file = 'data/cci/cci_papers.xlsx'  # Update this to the path of your Excel file
@@ -149,12 +88,6 @@ for index, row in df.iterrows():
                 crossref_type = item.get('type', '')
                 entry_type = 'article'  # Default entry type, adjust logic here for different types
 
-                # title_crossref = item.get('title', [])[0] if item.get('title') else ''
-                # print(preprocess_text(title_crossref))
-                # print(preprocess_text(encoded_reference))
-                # is_subseq, similarity_ratio = is_subsequence(title_crossref, encoded_reference)
-                # print(is_subseq, similarity_ratio)
-                
                 # Construct a BibTeX entry
                 bibtex_entry = {
                     'ENTRYTYPE': entry_type,
