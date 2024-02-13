@@ -1,4 +1,4 @@
-# Project data information and management
+# Data information and management
 
 ## AR6 reports and references
 

@@ -49,6 +49,6 @@ def check_titles_in_excel(bib_file_path, excel_file_path):
 
 # Example usage
 bib_file_path = 'output.bib'  # Change to your BibTeX file path
-excel_file_path = 'data/cci/cci_papers_toy.xlsx'  # Change to your Excel file path
+excel_file_path = '../data/cci/cci_papers.xlsx'  # Change to your Excel file path
 total_entries, no_match_count = check_titles_in_excel(bib_file_path, excel_file_path)
 print(f"Total entries: {total_entries}, Entries with no match: {no_match_count}")
