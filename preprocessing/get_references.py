@@ -99,8 +99,8 @@ def process_bibtex_entry(item, project_field):
         'volume': item.get('volume', 'No Volume'),
         'number': item.get('issue', 'No Issue'),
         'pages': item.get('page', 'No Pages'),
-        'doi': item.get('DOI', 'No DOI').rstrip(),
-        'project': str(project_field)  # Custom field for project
+        'doi': item.get('DOI', 'No DOI'),
+        'project': str(project_field).rstrip()  # Custom field for project
     }
     return entry
 
