@@ -30,7 +30,7 @@ Data is organized as follows:
     \cci            [cci references (.xlsx) and topics (.py)]
     \reports
         \pdf        [ipcc report files (.pdf)]
-        \txt        [ipcc report files (.pdf)]
+        \txt        [ipcc report files (.txt)]
     \references     [esa & ipcc references (.bib)]
 ```
 

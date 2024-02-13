@@ -20,8 +20,7 @@ headers = {
 }
 
 # Initialize counters
-doi_in_content_count = 0
-doi_from_url_count = 0
+reference_from_doi_count = 0
 reference_from_query_count = 0
 error_count = 0
 
@@ -134,7 +133,7 @@ for index, row in df.iterrows():
         db.entries.append(bibtex_entry)
         logging.info(f'Successfully processed Reference ID {reference_id} using {mode}.')
         if mode == 'doi':
-            doi_in_content_count += 1
+            reference_from_doi_count += 1
         elif mode == 'query':
             reference_from_query_count += 1
     else:
@@ -150,7 +149,7 @@ with open('output.bib', 'w', encoding='utf-8') as bibtex_file:
 print(f"Finished processing all {total_references} references. Check 'output.bib' for the BibTeX entries. Check 'error_log.txt' for errors and 'process_log.txt' for general logs.")
 
 # After processing all references, print the summary and close log files
-print(f"Summary:\n- References processed with DOI in content: {doi_in_content_count}\n- References processed with DOI extracted from webpage: {doi_from_url_count}\n- References processed from query: {reference_from_query_count}\n- References failing to process: {error_count}")
+print(f"Summary:\n- References processed with DOI in content or extracted from webpage: {reference_from_doi_count}\n- References processed from query: {reference_from_query_count}\n- References failing to process: {error_count}")
 
 # Close the log files
 error_log_file.close()
