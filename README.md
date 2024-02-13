@@ -27,17 +27,18 @@ Data is organized as follows:
 
 ```
 \data
+    \cci            [cci references (.xlsx) and topics (.py)]
     \reports
-        \pdf        [ipcc report files in .pdf format]
-        \txt        [ipcc report files in .txt format]
-    \references     [ipcc references in .bib format]
+        \pdf        [ipcc report files (.pdf)]
+        \txt        [ipcc report files (.pdf)]
+    \references     [esa & ipcc references (.bib)]
 ```
 
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
 AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
 
 ```python
-python get_data.py
+python get_ipcc_data.py
 ```
 
 Other files including Special Reports and Synthesis Report chapters, SPMs, TSs and their references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
@@ -51,6 +52,6 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Then optionally remove any duplicates from the bib file.
 
 ```python
-python get_bib.py
+python get_references.py
 python remove_duplicates.py
 ```
