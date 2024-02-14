@@ -91,7 +91,7 @@ def process_bibtex_entry(item, project_field):
     entry = {
         'ENTRYTYPE': 'article',  # Default type, adjust as needed
         'ID': item.get('DOI', '').replace('/', '_'),
-        'title': item.get('title', ['No Title'])[0],
+        'title': item.get('title', ['No Title'])[0] if item.get('title') else 'No Title',
         'author': ' and '.join([f"{author.get('given', '')} {author.get('family', '')}" for author in item.get('author', [])]),
         'journal': item.get('container-title', ['No Journal'])[0] if item.get('container-title') else 'No Journal',
         'year': str(item.get('published', {}).get('date-parts', [[None]])[0][0]) if item.get('published', {}) else 'No Year',

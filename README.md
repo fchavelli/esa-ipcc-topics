@@ -51,7 +51,7 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 scripts/pdf_to_txt.sh ../data/reports/pdf ../data/reports/txt
 ```
 
-Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. The Excel file is expected to have the following structure with no empty rows.
+Download the CCI references (.bib) or build a bibliography from an Excel file (containing at least a title or a doi for each reference). Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. The Excel file is expected to have the following structure with no empty rows.
 
 ```
 Project         | Reference
