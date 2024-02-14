@@ -5,11 +5,16 @@ from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
 import logging
 
+# The Excel document to extract references is expected to have the following structure and no empty rows:
+# Project         | Reference
+# Soil moisture   | Nitta Tomoko (2017) Impact of Arctic Wetlands on the Climate System: Model Sensitivity...
+# ...             | ...
+
 # Specify the path to your Excel file
 excel_file_path = './data/cci/srccl_ch1.xlsx'
 
 # Specify the log level: 'INFO' or 'ERROR'
-logging.basicConfig(level=logging.ERROR, format='%(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',

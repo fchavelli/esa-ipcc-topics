@@ -51,7 +51,7 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 scripts/pdf_to_txt.sh ../data/reports/pdf ../data/reports/txt
 ```
 
-Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Then optionally remove any duplicates from the bib file.
+Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Check documentation of `get_references.py` for input structure details and documentation. Then optionally remove any duplicates from the bib file using `remove_duplicates.py`.
 
 ```python
 python get_references.py
