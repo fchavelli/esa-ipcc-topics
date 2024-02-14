@@ -51,7 +51,15 @@ Once pdf files are downloaded, they can be converted to txt files using the foll
 scripts/pdf_to_txt.sh ../data/reports/pdf ../data/reports/txt
 ```
 
-Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Check documentation of `get_references.py` for input structure details and documentation. Then optionally remove any duplicates from the bib file using `remove_duplicates.py`.
+Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. The Excel file is expected to have the following structure with no empty rows.
+
+```
+Project         | Reference
+Soil moisture   | Nitta Tomoko (2017) Impact of Arctic Wetlands on the Climate System: Model Sensitivity...
+...             | ...
+```
+
+Create the reference file from the Excel document and optionally remove any duplicates from the bib file using the following command.
 
 ```python
 python get_references.py

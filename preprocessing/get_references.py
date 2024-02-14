@@ -1,14 +1,9 @@
-import pandas as pd
-import requests
 import re
+import logging
+import requests
+import pandas as pd
 from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
-import logging
-
-# The Excel document to extract references is expected to have the following structure and no empty rows:
-# Project         | Reference
-# Soil moisture   | Nitta Tomoko (2017) Impact of Arctic Wetlands on the Climate System: Model Sensitivity...
-# ...             | ...
 
 # Specify the path to your Excel file
 excel_file_path = './data/cci/srccl_ch1.xlsx'
