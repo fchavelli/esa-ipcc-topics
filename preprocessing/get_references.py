@@ -6,7 +6,7 @@ from bibtexparser.bwriter import BibTexWriter
 import logging
 
 # Specify the path to your Excel file
-excel_file_path = '../data/cci/cci_papers.xlsx'
+excel_file_path = './data/cci/srccl_ch1.xlsx'
 
 # Specify the log level: 'INFO' or 'ERROR'
 logging.basicConfig(level=logging.ERROR, format='%(levelname)s - %(message)s')
