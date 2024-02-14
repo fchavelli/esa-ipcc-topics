@@ -1,6 +1,6 @@
 env/
+results/
 data/cci/
 data/references/
 data/reports/
 __pycache__/
-temp/
