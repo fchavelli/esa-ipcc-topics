@@ -41,12 +41,12 @@ AR6 WG1,2,3 chapters and associated references can be downloaded automatically u
 python get_ipcc_data.py
 ```
 
-Other files including Special Reports and Synthesis Report chapters, SPMs, TSs and their references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
+Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, Summary for Policymakers (SPM), Technical Summaries (TS), Annexes (A) as well as references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
 
-Once pdf files are downloaded, they can be converted to txt files using the following command.
+Once pdf files are downloaded, they can be converted to txt files using the following command. The text in tables and figures are read when available (e.g. WG1 Chapter 1, Fig 1.1).
 
 ```bash
-./scripts/run_conversion.sh data/reports/pdf data/reports/txt
+scripts/pdf_to_txt.sh ../data/reports/pdf ../data/reports/txt
 ```
 
 Download the CCI references (.bib) or build a new bibliography from a raw Excel file (containing at least reference titles) using the following command. Reference metadata (including type, date, authors, journal, and doi) will be recovered online using Crossref API. Then optionally remove any duplicates from the bib file.
