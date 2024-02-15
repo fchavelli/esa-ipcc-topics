@@ -142,7 +142,7 @@ for index, row in df.iterrows():
         continue  # Skip to the next reference if unable to process
 
 # Write the BibTeX entries to a file
-with open('output.bib', 'w', encoding='utf-8') as bibtex_file:
+with open(f'{excel_file_path.split('/')[-1][:-5]}.bib', 'w', encoding='utf-8') as bibtex_file:
     bibtex_writer = BibTexWriter()
     bibtex_file.write(bibtex_writer.write(db))
 
