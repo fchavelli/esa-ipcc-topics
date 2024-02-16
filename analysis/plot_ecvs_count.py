@@ -1,3 +1,15 @@
+# This Python script is designed to visualize the occurrence of Essential Climate Variables (ECVs)
+# across various chapters of environmental reports. It reads data from an Excel file, aggregates 
+# the mentions of ECVs, and filters based on a specified minimum occurrence threshold. The script 
+# capitalizes the first letter of each ECV for consistency and visual appeal. ECVs are categorized 
+# into groups such as "atmosphere," "land," and "ocean," with each group represented by a specific 
+# color in the bar chart. The chart plots ECVs on the horizontal axis and their total mentions on 
+# the vertical axis, with ECV names rotated for readability. A legend is included to describe the 
+# color coding of categories, enhancing the chart's interpretability. The functionality allows for 
+# customization of the minimum occurrences filter to focus the visualization on more frequently 
+# mentioned ECVs. The final plot is saved as a PDF file, providing a clear and informative visual 
+# summary of the data.
+
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
@@ -54,7 +66,7 @@ def create_and_save_colored_plot_from_excel(excel_path, pdf_path, min_occurrence
     plt.legend(handles=legend_elements, title="ECV Categories")
 
     plt.ylabel('Total Mentions')
-    plt.title('Total Mentions of ECVs Across Chapters')
+    plt.title(f'ECVs count with more than {min_occurrences} occurences across AR6 reports')
     plt.tight_layout()  # Adjust layout to not cut off labels
 
     # Save the plot to a PDF file
@@ -65,6 +77,6 @@ def create_and_save_colored_plot_from_excel(excel_path, pdf_path, min_occurrence
 # Example usage
 min_occurrences = 100  # Set your minimum occurrences threshold here
 excel_path = './results/ecvs_in_reports.xlsx'  # Use the actual Excel file path
-pdf_path = f'./plots/ecvs_in_reports_colored_plot_min{min_occurrences}.pdf'  # Desired PDF file path
+pdf_path = f'./plots/ecvs_count_min{min_occurrences}.pdf'  # Desired PDF file path
 
 create_and_save_colored_plot_from_excel(excel_path, pdf_path, min_occurrences)
