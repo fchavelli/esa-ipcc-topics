@@ -2,6 +2,8 @@
 
 ## AR6 reports and references
 
+This folder is meant to store raw IPCC and ESA data (reports, references...)
+
 ### Reports
 - **WG1:** 12 chapters + 1 atlas, SPM, TS, 6 annexes. Each chapter has supp. materials (incl. Atlas)
 - **WG2:** 18 chapters, SPM, TS, 1 annex (essentially graphical). 16/18 chapters have supp materials (excl. chapters 1 and 7)
