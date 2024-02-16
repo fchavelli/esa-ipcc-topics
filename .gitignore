@@ -1,4 +1,6 @@
 env/
+temp/
+plots/
 results/
 data/cci/
 data/references/

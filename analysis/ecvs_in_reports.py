@@ -15,7 +15,7 @@ with open('./data/cci/ecv_aliases.json', 'r') as f:
 search_terms = ecv_aliases
 
 # Directory containing .txt files
-directory_path = './data/reports/temp'
+directory_path = './data/reports/txt'
 
 # Prepare regex patterns for search terms
 patterns = {}

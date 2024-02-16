@@ -12,7 +12,7 @@
 - **SROCC:** 6 chapters, SPM, TS, 0 annex, 5/6 chapters have supp materials (chapters 1, 2, 3, 4, 5)
 
 ### Remarks
-- All WG and SR chapters (incl. WG1 Atlas) and some SM chapters have references
+- All WG and SR chapters (incl. WG1 Atlas) as well as annexes and some SM chapters have references
 - The other reports (SYR, SPM, TS) refers directly to main report chapters
 - Reference cut-off date for last AR6 (WG3): 11 October 2021
 - WG1 atlas is refered to as chapter 13
