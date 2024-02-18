@@ -2,6 +2,8 @@ import json
 import pickle
 import logging
 
+# Create ECV instances with custom fiels and saves them in ./data/cci in a .pkl file
+
 # Projects not in any ECV instance:
     # Vegetation Parameters
     # RECCAP-2

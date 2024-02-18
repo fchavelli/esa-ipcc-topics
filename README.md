@@ -70,5 +70,5 @@ python remove_duplicates.py
 Define ECV information: names, associated CCI project, custom search terms, aliases, displays etc in `cci_topics.py` and run the following command to create objects.
 
 ```python
-python ecvs.py
+python ./utils/ecvs.py
 ```
