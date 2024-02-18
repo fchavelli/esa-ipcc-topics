@@ -60,11 +60,12 @@ Sea level       | Famiglietti J S (2015) Satellites provide the...
 ...             | ...
 ```
 
-Create the reference file from the Excel document and optionally remove any duplicates from the bib file using the following command.
+Create the reference file from the Excel document and optionally remove any duplicates and sanitise project names from the bib file using the following command.
 
 ```python
 python get_references.py
 python remove_duplicates.py
+python sanitise_project_names.py
 ```
 
 Define ECV information: names, associated CCI project, custom search terms, aliases, displays etc in `cci_topics.py` and run the following command to create objects.

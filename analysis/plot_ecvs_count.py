@@ -10,10 +10,10 @@
 # mentioned ECVs. The final plot is saved as a PDF file, providing a clear and informative visual 
 # summary of the data.
 
+import json
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-import json
 
 # Load ECV classification
 ecv_classification_path = './data/cci/ecv_classification.json'
