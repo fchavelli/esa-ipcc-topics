@@ -1,8 +1,8 @@
 # Analysis of ESA-IPCC topics : ECVs and references
 
 ## Foundation analysis
-Run `ecvs_in_reports.py` to compute and save the ECV count for each chapter
-Run `references.py` to exctract and save the matching CCI & IPCC references
+- Run `ecvs_in_reports.py` to compute and save the ECV count for each chapter
+- Run `references.py` to extract and save the matching CCI & IPCC references
 
 ## Visualisation
 Several tools allow to present the data:
