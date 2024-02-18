@@ -1,4 +1,4 @@
-# Analysis of ECVs in reports
+# Analysis of ESA-IPCC topics : ECVs and references
 
 ## Foundation analysis
 Run `ecvs_in_reports.py` to compute and save the ECV count for each chapter
