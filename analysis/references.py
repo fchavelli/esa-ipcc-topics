@@ -89,8 +89,6 @@ def process_files(folder_path, original_bib_path, report_tags):
     # Correctly save and close the Excel file
     excel_writer.close()
 
-
-
 # Example usage
 folder_path = './data/references'
 original_bib_path = './data/references/cci_no_duplicates.bib'
