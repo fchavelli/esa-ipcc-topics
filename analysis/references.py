@@ -1,83 +1,99 @@
 import os
-import bibtexparser
-from bibtexparser.bparser import BibTexParser
-from bibtexparser.customization import convert_to_unicode
-from tqdm import tqdm
 import logging
+import bibtexparser
+import pandas as pd
 
-# Configure logging
+# Set up basic configuration for logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
-# Documentation
-"""
-This script finds common references based on DOIs across multiple BibTeX files in a specified folder and compiles them into a new BibTeX file.
-- Parses each .bib file in the folder to find DOIs.
-- Compares DOIs across all files to find matches.
-- Writes matched references to a new file, ensuring no duplicates.
-- Logs progress and provides a summary of the analysis.
-"""
-
-def parse_bib_file(file_path):
-    """Parse a BibTeX file and return the database object."""
+def read_bib_file(filepath):
+    """Read a .bib file and return its content."""
     try:
-        with open(file_path, encoding='utf-8') as bibtex_file:
-            parser = BibTexParser(common_strings=True)
-            parser.customization = convert_to_unicode
-            bib_database = bibtexparser.load(bibtex_file, parser=parser)
+        with open(filepath, encoding='utf8') as bibtex_file:
+            bib_database = bibtexparser.load(bibtex_file)
         return bib_database
     except Exception as e:
-        logging.error(f"Error parsing file {file_path}: {e}")
+        logging.error(f"Error reading {filepath}: {e}")
         return None
 
-def find_common_references(main_bib_file, folder_path):
-    """Find common references across BibTeX files and compile them into a new file."""
-    main_db = parse_bib_file(main_bib_file)
-    if not main_db:
-        logging.error("Failed to parse main BibTeX file.")
+def find_files_with_tag(folder_path, tag):
+    """Find all .bib files in the given folder that contain the tag in their name."""
+    tagged_files = [f for f in os.listdir(folder_path) if f.endswith('.bib') and tag in f]
+    return tagged_files
+
+def filter_entries_by_doi(bib_database, dois):
+    """Filter entries in a bib_database that have a DOI matching any in the list 'dois'."""
+    filtered_entries = [entry for entry in bib_database.entries if entry.get('doi') in dois]
+    return filtered_entries
+
+def create_excel_sheet(writer, tag, entries):
+    """Create an Excel sheet for the given tag with the provided entries."""
+    # Convert entries to a DataFrame
+    df = pd.DataFrame(entries, columns=['project', 'doi', 'title', 'year', 'author', 'journal'])
+    df.to_excel(writer, sheet_name=tag, index=False)
+
+def process_files(folder_path, original_bib_path, report_tags):
+    original_bib_db = read_bib_file(original_bib_path)
+    if not original_bib_db:
+        logging.error("Failed to read the original bib file. Exiting...")
         return
 
-    main_dois = {entry.get('doi', '').lower() for entry in main_db.entries if 'doi' in entry}
-    matched_entries = []
-    files_analyzed = 0
+    original_dois = {entry.get('doi') for entry in original_bib_db.entries if entry.get('doi')}
 
-    for file in tqdm(os.listdir(folder_path), desc="Analyzing files"):
-        if file.endswith(".bib") and file != os.path.basename(main_bib_file) and 'wg1_ch' in file:
-            file_path = os.path.join(folder_path, file)
-            current_db = parse_bib_file(file_path)
-            if not current_db:
-                continue  # Skip files that couldn't be parsed
-            
-            current_dois = {entry.get('doi', '').lower() for entry in current_db.entries if 'doi' in entry}
-            common_dois = main_dois.intersection(current_dois)
-            
-            for entry in main_db.entries:
-                if entry.get('doi', '').lower() in common_dois:
-                    if entry not in matched_entries:  # Avoid duplicates
-                        matched_entries.append(entry)
-            
-            files_analyzed += 1
+    # Initialize Excel writer
+    excel_writer = pd.ExcelWriter('./results/matched_references.xlsx', engine='openpyxl')
 
-    # Writing matched entries to a new file
-    if matched_entries:
-        try:
-            matched_db = bibtexparser.bibdatabase.BibDatabase()
-            matched_db.entries = matched_entries
+    for tag in report_tags:
+        logging.info(f"Processing tag: {tag}")
+        tagged_files = find_files_with_tag(folder_path, tag)
+        if not tagged_files:
+            logging.info(f"No files found for {tag} report. Continuing to next report...")
+            continue
+
+        # Collect DOIs from files with the current tag
+        tag_dois = set()
+        for file in tagged_files:
+            logging.info(f"Analysing file: {file}")
+            db = read_bib_file(os.path.join(folder_path, file))
+            if db:
+                tag_dois.update(entry.get('doi') for entry in db.entries if entry.get('doi'))
+
+        # Filter original entries by DOIs found in tagged files
+        matching_entries = filter_entries_by_doi(original_bib_db, tag_dois)
+
+        if matching_entries:
+            # Write these entries to a new .bib file named after the tag
+            new_bib_db = bibtexparser.bibdatabase.BibDatabase()
+            new_bib_db.entries = matching_entries
+            with open(f"./results/matched_references_{tag}.bib", 'w', encoding='utf8') as new_bib_file:
+                bibtexparser.dump(new_bib_db, new_bib_file)
+            logging.info(f"Created matched_references_{tag}.bib with {len(matching_entries)} entries.")
+
+            # Prepare data for Excel
+            excel_entries = []
+            for entry in matching_entries:
+                excel_entries.append({
+                    'project': entry.get('project', ''),  # Use the 'project' field from the entry
+                    'doi': entry.get('doi', ''),
+                    'title': entry.get('title', ''),
+                    'year': entry.get('year', ''),
+                    'author': entry.get('author', ''),
+                    'journal': entry.get('journal', '')
+                })
             
-            with open('./results/matched_references.bib', 'w', encoding='utf-8') as bibtex_file:
-                bibtexparser.dump(matched_db, bibtex_file)
-                
-            logging.info(f"Matched references written to 'matched_references.bib'.")
-        except Exception as e:
-            logging.error(f"Failed to write matched references: {e}")
-    
-    # Summary
-    logging.info(f"Files analyzed: {files_analyzed}")
-    logging.info(f"Matched references found: {len(matched_entries)}")
-    logging.info(f"Unique DOIs (avoided duplicates): {len(set([entry['doi'] for entry in matched_entries if 'doi' in entry]))}")
+            # Create Excel sheet for the tag
+            create_excel_sheet(excel_writer, tag, excel_entries)
+        else:
+            logging.info(f"No matching entries found for {tag} report.")
+
+    # Correctly save and close the Excel file
+    excel_writer.close()
+
 
 
 # Example usage
-main_bib_file = './data/references/cci_no_duplicates.bib' # Replace with the path to your main BibTeX file
-folder_path = './data/references' # Replace with the path to your folder containing BibTeX files
-exlude_files = ['cci.bib', 'oc_no_duplicates.bib', 'output.bib']
-find_common_references(main_bib_file, folder_path)
+folder_path = './data/references'
+original_bib_path = './data/references/cci_no_duplicates.bib'
+report_tags = ['wg1', 'wg2', 'wg3']
+
+process_files(folder_path, original_bib_path, report_tags)

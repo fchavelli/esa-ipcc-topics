@@ -1,50 +1,65 @@
-import bibtexparser
-from bibtexparser.bparser import BibTexParser
-from bibtexparser.customization import convert_to_unicode
+import pandas as pd
 import matplotlib.pyplot as plt
-from collections import Counter
 import os
 
-def parse_bib_file(file_path):
-    """Parse the BibTeX file and return the database object."""
-    with open(file_path, encoding='utf-8') as bibtex_file:
-        parser = BibTexParser(common_strings=True)
-        parser.customization = convert_to_unicode
-        bib_database = bibtexparser.load(bibtex_file, parser=parser)
-    return bib_database
+# Ensure the plots directory exists
+plots_dir = './plots/projects'
+if not os.path.exists(plots_dir):
+    os.makedirs(plots_dir)
 
-def count_projects(bib_database):
-    """Count occurrences of each project value in the BibTeX entries."""
-    project_counts = Counter()
-    for entry in bib_database.entries:
-        # Check if 'project' field exists and count its occurrences
-        if 'project' in entry and entry['project'] != '':
-            project_counts[entry['project']] += 1
-    return project_counts
-
-def plot_project_counts(project_counts):
-    """Plot and save a bar plot of the count of each project."""
-    projects = list(project_counts.keys())
-    counts = list(project_counts.values())
+def process_excel_sheets(excel_path, hide_unwanted_projects=True):
+    # Load the Excel file
+    xl = pd.ExcelFile(excel_path)
     
-    plt.figure(figsize=(10, 8))
-    plt.bar(projects, counts, color='skyblue')
-    plt.xlabel('Project')
+    # Dictionary to keep track of total project counts across all sheets
+    total_project_counts = {}
+    
+    for sheet_name in xl.sheet_names:
+        # Read each sheet
+        df = xl.parse(sheet_name)
+        
+        # Ensure 'project' column exists
+        if 'project' in df.columns:
+            # Filter projects, if necessary
+            if hide_unwanted_projects:
+                df = df[~df['project'].str.contains('lpf|Slbc', case=False, na=False)]
+            
+            # Count occurrences of each project, excluding empty strings
+            project_counts = df['project'].value_counts().drop('', errors='ignore')
+            
+            # Update total counts
+            for project, count in project_counts.items():
+                total_project_counts[project] = total_project_counts.get(project, 0) + count
+            
+            # Sort projects in the sheet plot
+            project_counts.sort_values(ascending=False, inplace=True)
+            
+            # Plot for each sheet
+            plt.figure(figsize=(10, 6))
+            project_counts.plot(kind='bar', color='skyblue')
+            plt.title(f"Count of CCI projects references in {sheet_name.upper()} references")
+            plt.ylabel('Count')
+            plt.xlabel('CCI Projects')
+            plt.xticks(rotation=45, ha="right")
+            plt.tight_layout()
+            # Save the plot
+            plt.savefig(f"{plots_dir}/count_references_{sheet_name}.pdf")
+            plt.close()
+        
+    # Prepare overall plot with projects sorted in decreasing order
+    total_project_counts = pd.Series(total_project_counts).sort_values(ascending=False)
+    
+    plt.figure(figsize=(10, 6))
+    total_project_counts.plot(kind='bar', color='skyblue')
+    plt.title("Count of CCI project references among AR6 references")
     plt.ylabel('Count')
-    plt.title('Count of Each Project in BibTeX Entries')
+    plt.xlabel('CCI Projects')
     plt.xticks(rotation=45, ha="right")
-    plt.tight_layout()  # Adjust layout to make room for the rotated x-axis labels
+    plt.tight_layout()
+    plt.savefig(f"{plots_dir}/count_references_ar6.pdf")
+    plt.close()
     
-    # Ensure the directory exists
-    output_dir = './plots/matched_projects'
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Save the plot as a PDF
-    plt.savefig(f'{output_dir}/project_counts.pdf')
-    print(f'Plot saved as {output_dir}/project_counts.pdf')
+    print(f"Plots are saved in: {plots_dir}")
 
 # Example usage
-file_path = './results/matched_references.bib'  # Replace with the path to your BibTeX file
-bib_database = parse_bib_file(file_path)
-project_counts = count_projects(bib_database)
-plot_project_counts(project_counts)
+process_excel_sheets('./results/matched_references.xlsx')
