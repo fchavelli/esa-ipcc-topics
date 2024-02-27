@@ -14,3 +14,8 @@ Several tools allow to present the data:
 
 ### References
 - Count of CCI Projects in matching CCI-IPCC references: `plot_references.py`
+
+### Details
+
+#### ECVs count
+The list of ECVs is defined in `cci_topics.py` together with their categories and aliases. It is saved in an json for analysis and in an Excel document for display.

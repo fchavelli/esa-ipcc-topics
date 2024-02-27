@@ -1,4 +1,5 @@
 import json
+from openpyxl import Workbook
 
 CMIP6 = {
     'Systematic Biases': {
@@ -29,13 +30,12 @@ ECV = {
             "radiation budget",
             "atmosphere temperature",
             "water vapour",
-            "earth radiation budget",
             "lightning",
             "upper-air temperature",
-            "clouds"
+            "cloud"
         ],
         "atmospheric composition" : [
-            "aerosols",
+            "aerosol",
             "carbon dioxide",
             "methane",
             "ozone",
@@ -51,14 +51,14 @@ ECV = {
     "land": {
         "hydrosphere": [
             "groundwater",
-            "lakes",
+            "lake",
             "river discharge",
             "terrestrial water storage"
         ],
         "cryosphere": [
-            "glaciers",
-            "ice sheets",
-            "ice shelves",
+            "glacier",
+            "ice sheet",
+            "ice shelf",
             "permafrost",
             "snow"
         ],
@@ -67,7 +67,7 @@ ECV = {
             "albedo",
             "evaporation from land",
             "fire",
-            "FADAR",
+            "FAPAR",
             "land cover",
             "land surface temperature",
             "leaf area index",
@@ -85,87 +85,86 @@ ECV = {
             "sea ice",
             "sea level",
             "sea state",
-            "sea surface currents",
+            "sea surface current",
             "sea surface salinity",
             "sea surface stress",
             "sea surface temperature",
-            "subsurface currents",
+            "subsurface current",
             "subsurface salinity",
             "subsurface temperature"
         ],
         "biogeochemical": [
             "inorganic carbon",
             "nitrous oxide",
-            "nutrients",
+            "nutrient",
             "ocean colour",
             "oxygen",
-            "transient tracers"
+            "transient tracer"
         ],
         "biological/ecosystems": [
-            "marine habitats",
+            "marine habitat",
             "plankton"
         ]
     }
 }
 
-ecv_aliases = {"precipitation" : ["precipitations"],
-               "pressure" : ["pressures"],
-               "radiation budget" : ["radiation budgets"],
-               "atmosphere temperature" : ["atmosphere temperatures"],
-               "wind speed" : ["wind speeds"],
-               "wind direction" : ["wind directions"],
-               "earth radiation budget" : ["earth radiation budgets"],
-               "lightning" : ["lightnings"],
-               "upper-air temperature" : ["upper-air temperatures"],
-               "water vapour" : ["water vapors", "water vapor", "water vapours"],
-               "clouds" : ["cloud"],
-               "aerosols" : ["aerosol"],
-               "carbon dioxide" : ["carbon dioxides", "CO2"],
-               "methane" : ["methanes", "CH4"],
-               "ozone" : ["ozones", "O3"],
-               "other greenhouse gases" : ["other greenhouse gas", "other GHG", "other GHGs"],
-               "precursors for aerosols" : ["precursor for aerosols", "precursors for aerosol", "precursor for aerosol", "precursor of aerosols", "precursor of aerosol", "precursors of aerosols", "precursors of aerosol"],
+ecv_aliases = {"precipitation" : [],
+               "pressure" : [],
+               "radiation budget" : [],
+               "atmosphere temperature" : [],
+               "wind speed" : [],
+               "wind direction" : [],
+               "lightning" : [],
+               "upper-air temperature" : [],
+               "water vapour" : ["water vapor"],
+               "cloud" : [],
+               "aerosol" : [],
+               "carbon dioxide" : ["CO2"],
+               "methane" : ["CH4"],
+               "ozone" : ["O3"],
+               "other greenhouse gases" : ["other greenhouse gas", "other GHG"],
+               "precursors for aerosols" : ["precursors for aerosol", "precursor for aerosol", "precursor of aerosol", "precursors of aerosol"],
                "precursors for ozone" : ["precursor for ozone", "precursors of ozone", "precursor of ozone"],
-               "groundwater" : ["groundwaters"],
-               "lakes" : ["lake"],
-               "river discharge" : ["river discharges", "rivers discharge", "rivers discharges"],
-               "terrestrial water storage" : ["terrestrial water storages"],
-               "glaciers" : ["glacier"],
-               "ice sheets" : ["ice sheet"],
-               "ice shelves" : ["ice shelf"],
-               "permafrost" : ["permafrosts"],
+               "groundwater" : [],
+               "lake" : [],
+               "river discharge" : ["rivers discharge"],
+               "terrestrial water storage" : [],
+               "glacier" : [],
+               "ice sheet" : [],
+               "ice shelf" : ["ice shelves"],
+               "permafrost" : [],
                "snow" : [],
                "above-ground biomass" : ["above ground biomass"],
-               "albedo" : ["albedos"],
-               "evaporation from land" : ["evaporation from lands", "evaporations from land", "evaporations from lands"],
-               "fire" : ["fires"],
-               "FADAR" : ["fraction of absorbed photosynthetically active radiation", "fraction of absorbed photosynthetically active radiations", "FAPAR"],
+               "albedo" : [],
+               "evaporation from land" : ["evaporations from land"],
+               "fire" : [],
+               "FAPAR" : ["fraction of absorbed photosynthetically active radiation"],
                "land cover" : [],
-               "land surface temperature" : ["land surface temperatures", "land surfaces temperature", "land surfaces temperatures"],
-               "leaf area index" : ["leaf areas indexes"],
+               "land surface temperature" : ["lands surface temperature"],
+               "leaf area index" : [],
                "soil carbon" : [],
                "soil moisture" : [],
                "anthropogenic GHG fluxes" : ["anthropogenic greenhouse gases fluxes", "anthropogenic greenhouse gas flux", "anthropogenic greenhouse gases flux", "anthropogenic greenhouse gas fluxes", "anthropogenic GHGs fluxes", "anthropogenic GHG flux", "anthropogenic GHGs flux"],
                "anthropogenic water use" : [],
                "ocean surface heat flux" : ["ocean surface heat fluxes"],
-               "sea ice" : ["sea ices"],
-               "sea level" : ["sea levels", "seas level", "seas levels"],
-               "sea state" : ["sea states", "seas state", "seas states"],
-               "sea surface currents" : ["sea surface current", "seas surfaces current", "seas surface currents", "seas surfaces currents"],
-               "sea surface salinity" : ["sea surface salinities", "seas surfaces salinity", "sea surfaces salinity", "seas surfaces salinities"],
-               "sea surface stress" : ["sea surface stresses", "sea surfaces stress", "seas surfaces stresses", "seas surface stress", "seas surfaces stress"],
-               "sea surface temperature" : ["sea surface temperatures", "sea surfaces temperature", "sea surfaces temperatures", "seas surface temperatures", "seas surfaces temperature", "seas surfaces temperatures"],
-               "subsurface currents" : ["subsurface current", "subsurfaces current", "subsurfaces currents"],
-               "subsurface salinity" : ["subsurface salinities", "subsurfaces salinity", "subsurfaces salinities"],
-               "subsurface temperature" : ["subsurface temperatures", "subsurfaces temperature", "subsurfaces temperatures"],
-               "inorganic carbon" : ["inorganic carbons"],
-               "nitrous oxide" : ["nitrous oxides", "N2O"],
-               "nutrients" : ["nutrient"],
-               "ocean colour" : ["ocean colours", "oceans colour", "oceans colours"],
-               "oxygen" : ["oxygens", " O2"], # space to avoid 'o2' in 'co2'
-               "transient tracers" : ["transient tracer", "transients tracer", "transients tracers"],
-               "marine habitats" : ["marine habitat"],
-               "plankton" : ["planktons"]
+               "sea ice" : [],
+               "sea level" : ["seas level"],
+               "sea state" : ["seas state"],
+               "sea surface current" : ["seas surface current", "seas surface currents"],
+               "sea surface salinity" : ["seas surface salinity"],
+               "sea surface stress" : ["sea surface stresses", "seas surface stress"],
+               "sea surface temperature" : ["seas surface temperature"],
+               "subsurface current" : [],
+               "subsurface salinity" : ["subsurfaces salinity"],
+               "subsurface temperature" : ["subsurfaces temperature"],
+               "inorganic carbon" : [],
+               "nitrous oxide" : ["N2O"],
+               "nutrient" : [],
+               "ocean colour" : ["oceans colour"],
+               "oxygen" : [" O2"], # space to avoid 'o2' in 'co2'
+               "transient tracer" : [],
+               "marine habitat" : [],
+               "plankton" : []
 }
 
 projects = ["Aerosol", "Biomass", "Climate Modelling User Group (CMUG)", "Cloud", "Fire", "Greenhouse Gases (GHGs)", "Glaciers", "High Resolution Land Cover", "Ice Sheets (Antarctic)", "Ice Sheets (Greenland)", "Lakes", "Land Cover", "Land Surface Temperature", "Ocean Colour", "Ozone", "Permafrost", "Precursors for aerosols and ozone", "RECCAP-2", "River Discharge", "Sea Ice", "Sea Level", "Sea Level Budget Closure", "Sea State", "Sea Surface Salinity", "Sea Surface Temperature", "Snow", "Soil Moisture", "Vegetation Parameters", "Water Vapour"]
@@ -178,3 +177,25 @@ with open("./data/cci/ecv_classification.json", "w") as f:
 
 with open("./data/cci/projects.json", "w") as f:
     json.dump(projects, f)
+
+
+def save_dict_to_excel(data_dict, file_name='output.xlsx'):
+    # Create a new Excel workbook and grab the active worksheet
+    wb = Workbook()
+    ws = wb.active
+    
+    # Iterate over the dictionary items
+    for row_index, (key, values) in enumerate(data_dict.items(), start=1):
+        # Write the key in the first column
+        ws.cell(row=row_index, column=1, value=key)
+        
+        # Write the values in the next columns
+        for col_index, value in enumerate(values, start=2):
+            ws.cell(row=row_index, column=col_index, value=value)
+    
+    # Save the workbook to the specified file name
+    wb.save(file_name)
+    print(f"Dictionary saved to '{file_name}' successfully.")
+
+# Save the dictionary to an Excel file
+save_dict_to_excel(ecv_aliases, './temp/ecv_aliases.xlsx')

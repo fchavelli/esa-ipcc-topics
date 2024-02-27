@@ -15,6 +15,7 @@ search_terms = ecv_aliases
 
 # Directory containing .txt files
 directory_path = './data/reports/txt'
+directory_path = './temp'
 
 # Prepare regex patterns for search terms
 patterns = {}
@@ -44,6 +45,7 @@ for file in os.listdir(directory_path):
 
 # Initialize Excel writer
 excel_path = './results/ecvs_in_reports.xlsx'
+excel_path = './temp/ecvs_in_reports.xlsx'
 with pd.ExcelWriter(excel_path) as writer:
     for tag, files in files_by_tag.items():
         # Initialize DataFrame for the current tag
