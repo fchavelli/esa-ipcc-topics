@@ -4,14 +4,15 @@ import re
 import json
 import pandas as pd
 
+# To do: modify the count to exclude occurences from in text references
+# Subtract occurences in references titles, not in all .bib file (to ignore abstracts)
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
 # Load search terms and their aliases
 with open('./data/cci/ecv_aliases.json', 'r') as f:
-    ecv_aliases = json.load(f)
-
-search_terms = ecv_aliases
+    search_terms = json.load(f)
 
 # Directory containing .txt files
 directory_path = './data/reports/txt'
