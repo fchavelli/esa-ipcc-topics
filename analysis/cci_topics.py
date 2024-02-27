@@ -40,8 +40,7 @@ ECV = {
             "methane",
             "ozone",
             "other greenhouse gases",
-            "precursors for aerosols",
-            "precursors for ozone"
+            "precursors for aerosols and ozone"
         ],
         "wind" : [
             "wind speed",
@@ -123,8 +122,7 @@ ecv_aliases = {"precipitation" : [],
                "methane" : ["CH4"],
                "ozone" : ["O3"],
                "other greenhouse gases" : ["other greenhouse gas", "other GHG"],
-               "precursors for aerosols" : ["precursors for aerosol", "precursor for aerosol", "precursor of aerosol", "precursors of aerosol"],
-               "precursors for ozone" : ["precursor for ozone", "precursors of ozone", "precursor of ozone"],
+               "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone"],
                "groundwater" : [],
                "lake" : [],
                "river discharge" : ["rivers discharge"],
