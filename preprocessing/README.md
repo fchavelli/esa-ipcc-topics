@@ -2,7 +2,7 @@
 
 ## IPCC reports
 
-### Download PDF files
+### Download PDF
 
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
 AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
@@ -13,7 +13,7 @@ python get_ipcc_data.py
 
 Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, Summary for Policymakers (SPM), Technical Summaries (TS), Annexes (A) as well as references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
 
-### Convert PDF to TXT files
+### Convert PDF to TXT
 
 Once pdf files are downloaded, they can be converted to txt files using the following command. The text in tables and figures are read when available (e.g. WG1 Chapter 1, Fig 1.1).
 
