@@ -31,3 +31,8 @@ def convert_pdf_folder_to_txt(source_folder, target_folder):
         print(f"Converted ({i+1}/{len(pdf_files)}): {pdf_file} to txt")
         
     print("Conversion completed.")
+
+
+source_folder = './data/reports/pdf'
+target_folder = './data/reports/txt'
+convert_pdf_folder_to_txt(source_folder, target_folder)
