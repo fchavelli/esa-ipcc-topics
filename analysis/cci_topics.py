@@ -1,27 +1,6 @@
 import json
 from openpyxl import Workbook
 
-CMIP6 = {
-    'Systematic Biases': {
-        'Clouds/Circulation': ['CFMIP', 'DynVarMIP'],
-        'Regional phenomena': ['GMMIP', 'HighResMIP', 'PAMIP'],
-        'Ocean/Land/Ice': ['OMIP', 'FAFMIP', 'LS3MIP', 'SIMIP', 'ISMIP6']
-    },
-    'Response to Forcing': {
-        'Paleo': ['PMIP'],
-        'Characterizing forcing': ['RFMIP', 'DAMIP', 'VolMIP'],
-        'Chemistry/Aerosols': ['AerChemMIP'],
-        'Carbon cycle': ['C4MIP']
-    },
-    'Variability, Predictability, Future Scenarios': {
-        'Land use': ['LUMIP'],
-        'Geo-engineering': ['CDRMIP', 'GeoMIP'],
-        'Decadal prediction': ['DCPP'],
-        'Scenarios': ['ScenarioMIP'],
-        'Impacts': ['CORDEX', 'VIACS AB']
-    }
-}
-
 ECV = {
     "atmosphere": {
         "surface" : [
@@ -166,6 +145,27 @@ ecv_aliases = {"precipitation" : [],
 }
 
 projects = ["Aerosol", "Biomass", "Climate Modelling User Group (CMUG)", "Cloud", "Fire", "Greenhouse Gases (GHGs)", "Glaciers", "High Resolution Land Cover", "Ice Sheets (Antarctic)", "Ice Sheets (Greenland)", "Lakes", "Land Cover", "Land Surface Temperature", "Ocean Colour", "Ozone", "Permafrost", "Precursors for aerosols and ozone", "RECCAP-2", "River Discharge", "Sea Ice", "Sea Level", "Sea Level Budget Closure", "Sea State", "Sea Surface Salinity", "Sea Surface Temperature", "Snow", "Soil Moisture", "Vegetation Parameters", "Water Vapour"]
+
+CMIP6 = {
+    'Systematic Biases': {
+        'Clouds/Circulation': ['CFMIP', 'DynVarMIP'],
+        'Regional phenomena': ['GMMIP', 'HighResMIP', 'PAMIP'],
+        'Ocean/Land/Ice': ['OMIP', 'FAFMIP', 'LS3MIP', 'SIMIP', 'ISMIP6']
+    },
+    'Response to Forcing': {
+        'Paleo': ['PMIP'],
+        'Characterizing forcing': ['RFMIP', 'DAMIP', 'VolMIP'],
+        'Chemistry/Aerosols': ['AerChemMIP'],
+        'Carbon cycle': ['C4MIP']
+    },
+    'Variability, Predictability, Future Scenarios': {
+        'Land use': ['LUMIP'],
+        'Geo-engineering': ['CDRMIP', 'GeoMIP'],
+        'Decadal prediction': ['DCPP'],
+        'Scenarios': ['ScenarioMIP'],
+        'Impacts': ['CORDEX', 'VIACS AB']
+    }
+}
 
 with open("./data/cci/ecv_aliases.json", "w") as f:
     json.dump(ecv_aliases, f)
