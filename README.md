@@ -37,8 +37,8 @@ Data is organized as follows:
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
 AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
 
-```python
-python get_ipcc_data.py
+```
+python download_reports.py
 ```
 
 Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, Summary for Policymakers (SPM), Technical Summaries (TS), Annexes (A) as well as references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
