@@ -97,10 +97,10 @@ ecv_aliases = {"precipitation" : [],
                "water vapour" : ["water vapor"],
                "cloud" : [],
                "aerosol" : [],
-               "carbon dioxide" : ["CO2", "CO 2", "CO₂"],
-               "methane" : ["CH4", "CH 4", "CH₄"],
+            #    "carbon dioxide" : ["CO2", "CO 2", "CO₂"],
+            #    "methane" : ["CH4", "CH 4", "CH₄"],
                "ozone" : ["O3", "O 3", "O₃"],
-               "other greenhouse gases" : ["other greenhouse gas", "other GHG"],
+            #    "other greenhouse gases" : ["other greenhouse gas", "other GHG"],
                "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone"],
                "groundwater" : [],
                "lake" : [],
@@ -146,6 +146,39 @@ ecv_aliases = {"precipitation" : [],
 
 projects = ["Aerosol", "Biomass", "Climate Modelling User Group (CMUG)", "Cloud", "Fire", "Greenhouse Gases (GHGs)", "Glaciers", "High Resolution Land Cover", "Ice Sheets (Antarctic)", "Ice Sheets (Greenland)", "Lakes", "Land Cover", "Land Surface Temperature", "Ocean Colour", "Ozone", "Permafrost", "Precursors for aerosols and ozone", "RECCAP-2", "River Discharge", "Sea Ice", "Sea Level", "Sea Level Budget Closure", "Sea State", "Sea Surface Salinity", "Sea Surface Temperature", "Snow", "Soil Moisture", "Vegetation Parameters", "Water Vapour"]
 
+project_aliases = {
+               "aerosol" : [],
+               "anthropogenic water use" : [],
+               "biomass" : [],
+               "CMUG" : ["Climate Modelling User Group", "climate modelling user group"],
+               "cloud" : [],
+               "fire" : [],
+               "greenhouse gases" : ["carbon dioxide", "CO2", "CO 2", "CO₂", "methane", "CH4", "CH 4", "CH₄", "nitrous oxide", "N2O", "N 2O", "N₂O", "other greenhouse gas", "other GHG"],
+               "glacier" : [],
+               "high resolution land cover" : [],
+               "ice sheet" : [],
+               "lake" : [],
+               "land cover" : [],
+               "land surface temperature" : ["lands surface temperature"],
+               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance"],
+               "ocean colour" : ["oceans colour"],
+               "ozone" : ["O3", "O 3", "O₃"],
+               "permafrost" : [],
+               "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone"],
+               "RECCAP-2" : ['reccap', 'RECCAP'],
+               "river discharge" : ["rivers discharge"],
+               "sea ice" : [],
+               "sea level" : ["seas level"],
+               "sea level budget closure" : [],
+               "sea state" : ["seas state"],
+               "sea surface salinity" : ["seas surface salinity"],
+               "sea surface temperature" : ["seas surface temperature"],
+               "snow" : [],
+               "soil moisture" : [],
+               "vegetation parameters" : [],
+               "water vapour" : ["water vapor"],
+}
+
 CMIP6 = {
     'Systematic Biases': {
         'Clouds/Circulation': ['CFMIP', 'DynVarMIP'],
@@ -167,8 +200,21 @@ CMIP6 = {
     }
 }
 
+def merge_dicts(dict1, dict2):
+    merged_dict = dict1.copy()  # Make a copy of the first dictionary
+    merged_dict.update(dict2)    # Update with the second dictionary
+    return merged_dict
+
+search_terms = merge_dicts(ecv_aliases, project_aliases)
+
+with open("./data/cci/search_terms.json", "w") as f:
+    json.dump(search_terms, f)
+
 with open("./data/cci/ecv_aliases.json", "w") as f:
     json.dump(ecv_aliases, f)
+
+with open("./data/cci/project_aliases.json", "w") as f:
+    json.dump(project_aliases, f)
 
 with open("./data/cci/ecv_classification.json", "w") as f:
     json.dump(ECV, f)
@@ -196,4 +242,4 @@ def save_dict_to_excel(data_dict, file_name='output.xlsx'):
     print(f"Dictionary saved to '{file_name}' successfully.")
 
 # Save the dictionary to an Excel file
-save_dict_to_excel(ecv_aliases, './temp/ecv_aliases.xlsx')
+save_dict_to_excel(search_terms, './temp/search_terms.xlsx')

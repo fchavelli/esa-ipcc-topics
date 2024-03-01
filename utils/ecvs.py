@@ -15,7 +15,7 @@ import logging
     # Sea Level Budget Closure
 
 # Assumptions
-    # Project 'ICe Sheets' created to handle 'Ice Sheets (Antarctic)' and 'Ice Sheets (Greenland)'
+    # Project 'Ice Sheets' created to handle 'Ice Sheets (Antarctic)' and 'Ice Sheets (Greenland)'
     # ECV 'above-ground biomass' is part of 'Biomass' project
 
 # Import ecv instances:

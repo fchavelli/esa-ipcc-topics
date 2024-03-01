@@ -29,7 +29,7 @@ def filter_entries_by_doi(bib_database, dois):
 def create_excel_sheet(writer, tag, entries):
     """Create an Excel sheet for the given tag with the provided entries."""
     # Convert entries to a DataFrame
-    df = pd.DataFrame(entries, columns=['project', 'doi', 'title', 'year', 'author', 'journal'])
+    df = pd.DataFrame(entries, columns=['Project', 'DOI', 'Title', 'Year', 'Author', 'Journal'])
     df.to_excel(writer, sheet_name=tag, index=False)
 
 def process_files(folder_path, original_bib_path, report_tags):
@@ -73,12 +73,12 @@ def process_files(folder_path, original_bib_path, report_tags):
             excel_entries = []
             for entry in matching_entries:
                 excel_entries.append({
-                    'project': entry.get('project', ''),  # Use the 'project' field from the entry
-                    'doi': entry.get('doi', ''),
-                    'title': entry.get('title', ''),
-                    'year': entry.get('year', ''),
-                    'author': entry.get('author', ''),
-                    'journal': entry.get('journal', '')
+                    'Project': entry.get('project', ''),  # Use the 'project' field from the entry
+                    'DOI': entry.get('doi', ''),
+                    'Title': entry.get('title', ''),
+                    'Year': entry.get('year', ''),
+                    'Author': entry.get('author', ''),
+                    'Journal': entry.get('journal', '')
                 })
             
             # Create Excel sheet for the tag

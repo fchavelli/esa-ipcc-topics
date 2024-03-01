@@ -5,4 +5,5 @@ with open(ecvs_file_path, 'rb') as file:
     ecv_instances = pickle.load(file)
 
 for ecv in ecv_instances:
-    ecv.display()
+    #ecv.display()
+    print(ecv.name, ecv.project)

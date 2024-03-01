@@ -11,12 +11,12 @@ import pandas as pd
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
 # Load search terms and their aliases
-with open('./data/cci/ecv_aliases.json', 'r') as f:
+with open('./data/cci/search_terms.json', 'r') as f:
     search_terms = json.load(f)
 
 # Directory containing .txt files
 directory_path = './data/reports/content'
-output_excel_path = './results/ecvs_in_reports.xlsx'  # Actual output file path
+output_excel_path = './results/terms_in_reports.xlsx'  # Actual output file path
 
 # Prepare regex patterns for search terms
 patterns = {}
@@ -45,13 +45,13 @@ for file in os.listdir(directory_path):
         files_by_tag[tag].append(file)
 
 # Initialize Excel writer
-excel_path_temp = './results/ecvs_in_reports_temp.xlsx'
+excel_path_temp = './results/terms_in_reports_temp.xlsx'
 
 with pd.ExcelWriter(excel_path_temp) as writer:
     for tag, files in files_by_tag.items():
         # Initialize DataFrame for the current tag
-        results_df = pd.DataFrame(columns=['ECV'] + [file.replace('.txt', '') for file in files])
-        results_df['ECV'] = list(search_terms.keys())
+        results_df = pd.DataFrame(columns=['Term'] + [file.replace('.txt', '') for file in files])
+        results_df['Term'] = list(search_terms.keys())
 
         # Search through files of the current tag
         for file in files:
@@ -61,7 +61,7 @@ with pd.ExcelWriter(excel_path_temp) as writer:
                     text = f.read()
                 for term, pattern in patterns.items():
                     count = len(pattern.findall(text))
-                    results_df.loc[results_df['ECV'] == term, file.replace('.txt', '')] = count
+                    results_df.loc[results_df['Term'] == term, file.replace('.txt', '')] = count
             except Exception as e:
                 logging.warning(f'Error processing file {file}: {e}')
 
@@ -70,7 +70,7 @@ with pd.ExcelWriter(excel_path_temp) as writer:
 
 # Sort the columns so that CH10 appears after CH9 and not after CH1
 def sort_columns(df):
-    ecv_column = df['ECV'] if 'ECV' in df.columns else None
+    ecv_column = df['Term'] if 'Term' in df.columns else None
     def sort_key(col):
         if 'ch' in col:
             num_part = int(''.join(filter(str.isdigit, col.split('ch')[-1])))
@@ -79,10 +79,10 @@ def sort_columns(df):
             return (1, col)
         else:
             return (2, col)
-    columns_to_sort = [col for col in df.columns if col != 'ECV']
+    columns_to_sort = [col for col in df.columns if col != 'Term']
     sorted_columns = sorted(columns_to_sort, key=sort_key)
     if ecv_column is not None:
-        sorted_columns = ['ECV'] + sorted_columns
+        sorted_columns = ['Term'] + sorted_columns
     return df[sorted_columns]
 
 input_excel_path = excel_path_temp  # Actual input file path
