@@ -31,13 +31,13 @@ python ./preprocessing/split_chapter_references.py
 
 ## IPCC references
 
-IPCC report references (.bib) can be downloaded from the IPCC website for all WGs chapters (but not for supplementary materials and annexes that are only available in text). Regarding SRs, it is possible to recover references from the `References` sections at the end of each report webpage. These raw, incomplete, duplicates references can be pasted in xlsx documents in a `online_references` folder and processed all at once (removing reference ids, empty rows and duplicates) using the following command.
+IPCC report references (.bib) can be downloaded from the IPCC website for all WGs chapters (but not for supplementary materials and annexes that are only available in text). Regarding SRs, it is possible to recover references from the `References` sections at the end of each report webpage. These raw, incomplete, duplicates references can be pasted in xlsx documents in `/data/online_references` and processed all at once (removing reference ids, empty rows and duplicates) using the following command.
 
 ```
 python ./preprocessing/clean_online_references.py
 ```
 
-Follow the procedure as for CCI references below to create bib files from xlsx files. The expected Excel format is the following.
+Follow the procedure as for CCI references (described below) to create bib files from xlsx files. The expected Excel format is the following.
 ```
 Reference
 Nitta Tomoko (2017) Impact of Arctic Wetlands...
