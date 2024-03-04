@@ -1,8 +1,20 @@
 # Data information and management
 
-## AR6 reports and references
+This folder is meant to store raw and processed IPCC and ESA data (reports, references...). It is organised as follows.
 
-This folder is meant to store raw IPCC and ESA data (reports, references...)
+```
+\data
+    \cci                [cci references (.xlsx) and search terms (.json)]
+    \reports
+        \pdf            [ipcc report files (.pdf)]
+        \txt            [ipcc report files (.txt)]
+        \content        [ipcc report content (.txt)]
+        \references     [ipcc report references (.txt)]
+    \references         [esa & ipcc references (.bib)]
+    \online_references  [ipcc references retrieved online (.xlsx)]
+```
+
+## IPCC AR6 reports and references
 
 ### Reports
 - **WG1:** 12 chapters + 1 atlas, SPM, TS, 6 annexes. Each chapter has supp. materials (incl. Atlas)
