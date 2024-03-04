@@ -2,7 +2,5 @@ env/
 temp/
 plots/
 results/
-data/cci/
-data/references/
-data/reports/
+data/*
 __pycache__/

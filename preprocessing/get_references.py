@@ -6,7 +6,7 @@ from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
 
 # Specify the path to your Excel file
-excel_file_path = './data/cci/srccl_ch1.xlsx'
+excel_file_path = './data/online_references/sr15_ch1 copy.xlsx'
 excel_name = excel_file_path.split('/')[-1][:-5]
 
 # Specify the log level: 'INFO' or 'ERROR'
@@ -100,8 +100,9 @@ def process_bibtex_entry(item, project_field):
         'number': item.get('issue', 'No Issue'),
         'pages': item.get('page', 'No Pages'),
         'doi': item.get('DOI', 'No DOI'),
-        'project': str(project_field).title().rstrip()  # Custom field for project
     }
+    if project_field:
+        entry['project'] = str(project_field).title().rstrip() # Custom field for project
     return entry
 
 # Initialize the BibTeX database
@@ -111,11 +112,19 @@ db = BibDatabase()
 df = pd.read_excel(excel_file_path)
 total_references = len(df)
 
+# Check for 'Project' field
+project = (df.shape[1] == 2)
+if project == False:
+    project_field = None
+
 # Process each reference in the DataFrame
 for index, row in df.iterrows():
     reference_id = index + 1
-    project_field = row.iloc[0]  # Assuming project field is in the first column
-    reference_content = row.iloc[1]  # Assuming reference content is in the second column
+    if project:
+        project_field = row.iloc[0]  # Assuming project field is in the first column
+        reference_content = row.iloc[1]  # Assuming reference content is in the second column
+    else:
+        reference_content = row.iloc[0] # Assuming reference content is in the first column
     logging.info(f'Reference {reference_id}/{total_references}')
 
     mode, content = find_doi_or_url(reference_content)
