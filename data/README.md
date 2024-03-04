@@ -6,10 +6,10 @@ This folder is meant to store raw and processed IPCC and ESA data (reports, refe
 \data
     \cci                [cci references (.xlsx) and search terms (.json)]
     \reports
-        \pdf            [ipcc report files (.pdf)]
-        \txt            [ipcc report files (.txt)]
-        \content        [ipcc report content (.txt)]
-        \references     [ipcc report references (.txt)]
+        \pdf            [ipcc report raw files (.pdf)]
+        \txt            [ipcc report raw files (.txt)]
+        \content        [ipcc report in-text content (.txt)]
+        \references     [ipcc report in-text references (.txt)]
     \references         [esa & ipcc references (.bib)]
     \online_references  [ipcc references retrieved online (.xlsx)]
 ```
