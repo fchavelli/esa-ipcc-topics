@@ -22,21 +22,27 @@ def remove_empty_rows(input_file, output_file):
     # Read the Excel file into a DataFrame
     df = pd.read_excel(input_file)
 
+    # Replace all occurrences of "↩" with an empty string
+    df.replace("↩", "", inplace=True)
+
+    # Remove duplicates
+    df.drop_duplicates(inplace=True)
+
     # Remove empty rows
     df.dropna(axis=0, how='all', inplace=True)
 
     # Save the DataFrame to a new Excel file
     df.to_excel(output_file, index=False)
 
-def remove_duplicates(input_file, output_file):
-    # Read the Excel file into a DataFrame
-    df = pd.read_excel(input_file)
+# def remove_duplicates(input_file, output_file):
+#     # Read the Excel file into a DataFrame
+#     df = pd.read_excel(input_file)
 
-    # Remove duplicates
-    df.drop_duplicates(inplace=True)
+#     # Remove duplicates
+#     df.drop_duplicates(inplace=True)
 
-    # Save the DataFrame to a new Excel file
-    df.to_excel(output_file, index=False)
+#     # Save the DataFrame to a new Excel file
+#     df.to_excel(output_file, index=False)
 
 # Create directories if they don't exist
 directory = "./data/online_references"
@@ -46,4 +52,4 @@ for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
         process_xlsx_file(file_path, file_path)
         remove_empty_rows(file_path, file_path)
-        remove_duplicates(file_path, file_path)
+        #remove_duplicates(file_path, file_path)

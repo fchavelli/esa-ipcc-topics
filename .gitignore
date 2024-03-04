@@ -3,4 +3,5 @@ temp/
 plots/
 results/
 data/*
+logs/
 __pycache__/

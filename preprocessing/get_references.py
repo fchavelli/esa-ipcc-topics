@@ -6,7 +6,8 @@ from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
 
 # Specify the path to your Excel file
-excel_file_path = './data/online_references/sr15_ch1 copy.xlsx'
+bib_file_path = './data/references'
+excel_file_path = './data/online_references/srccl_ch2.xlsx'
 excel_name = excel_file_path.split('/')[-1][:-5]
 
 # Specify the log level: 'INFO' or 'ERROR'
@@ -26,8 +27,8 @@ reference_from_query_count = 0
 error_count = 0
 
 # Open error and warning log files
-error_log_file = open(f'{excel_name}_error_log.txt', 'w', encoding='utf-8')
-warning_log_file = open(f'{excel_name}_warning_log.txt', 'w', encoding='utf-8')
+error_log_file = open(f'./logs/{excel_name}_error_log.txt', 'w', encoding='utf-8')
+warning_log_file = open(f'./logs/{excel_name}_warning_log.txt', 'w', encoding='utf-8')
 
 # Update the functions to write to the error and warning logs
 def log_error(message):
@@ -152,11 +153,11 @@ for index, row in df.iterrows():
         continue  # Skip to the next reference if unable to process
 
 # Write the BibTeX entries to a file
-with open(f'{excel_name}.bib', 'w', encoding='utf-8') as bibtex_file:
+with open(f'{bib_file_path}/{excel_name}.bib', 'w', encoding='utf-8') as bibtex_file:
     bibtex_writer = BibTexWriter()
     bibtex_file.write(bibtex_writer.write(db))
 
-print(f"Finished processing all {total_references} references. Check 'output.bib' for the BibTeX entries. Check 'error_log.txt' for errors and 'process_log.txt' for general logs.")
+print(f"Finished processing all {total_references} references. Check '{excel_name}.bib' for the BibTeX entries. Check 'error_log.txt' for errors and 'warning_log.txt' for general logs.")
 
 # After processing all references, print the summary and close log files
 print(f"Summary:\n- References processed with DOI in content or extracted from webpage: {reference_from_doi_count}\n- References processed from query: {reference_from_query_count}\n- References failing to process: {error_count}")
