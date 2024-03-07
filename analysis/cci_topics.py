@@ -161,7 +161,7 @@ project_aliases = {
                "lake" : [],
                "land cover" : [],
                "land surface temperature" : ["lands surface temperature"],
-               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance", "nitrous oxide", "N2O", "N 2O", "N₂O", "other greenhouse gas", "other GHG", "halogenated carbon compound", "chlorofluorocarbon", "CFC", "hydrofluorocarbon", "HFC", "hydrochlorofluorocarbon", "HCFC", "perfluorocarbon", "PFC", "sulphur hexafluoride", "SF6", "SF 6", "SF₆"],
+               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance", "nitrous oxide", "N2O", "N 2O", "N₂O", "sulphur hexafluoride", "SF6", "SF 6", "SF₆", "other greenhouse gas", "other GHG", "halogenated carbon compound", "chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon"],
                "ocean colour" : ["oceans colour"],
                "ozone" : ["O3", "O 3", "O₃"],
                "permafrost" : [],

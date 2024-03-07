@@ -7,7 +7,7 @@ from bibtexparser.bwriter import BibTexWriter
 
 # Specify the path to your Excel file
 bib_file_path = './data/references'
-excel_file_path = './data/online_references/srccl_ch2.xlsx'
+excel_file_path = './data/online_references/srocc_ch1.xlsx'
 excel_name = excel_file_path.split('/')[-1][:-5]
 
 # Specify the log level: 'INFO' or 'ERROR'

@@ -4,8 +4,7 @@ import re
 import json
 import pandas as pd
 
-# To do: modify the count to exclude occurences from in text references
-# Subtract occurences in references titles, not in all .bib file (to ignore abstracts)
+analysis = 'ars' # Choose between 'ar6' or 'ars
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
@@ -15,8 +14,10 @@ with open('./data/cci/search_terms.json', 'r') as f:
     search_terms = json.load(f)
 
 # Directory containing .txt files
-directory_path = './data/reports/content'
-output_excel_path = './results/terms_in_reports.xlsx'  # Actual output file path
+ar6_directory_path = './data/reports/content'
+ars_directory_path = './data/reports/full'
+ar6_output_excel_path = './results/terms_in_reports_ar6.xlsx'
+ars_output_excel_path = './results/terms_in_reports_ars.xlsx'
 
 # Prepare regex patterns for search terms
 patterns = {}
@@ -26,7 +27,18 @@ for term, aliases in search_terms.items():
     patterns[term] = re.compile(pattern, re.IGNORECASE)
 
 # Define tags
-tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3', 'syr']
+ar6_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3', 'syr']
+ars_tags = [f'ar{i}' for i in range(1,7)]
+
+# Select analysis
+if analysis == 'ar6':
+    tags = ar6_tags
+    directory_path = ar6_directory_path
+    output_excel_path = ar6_output_excel_path
+elif analysis == 'ars':
+    tags = ars_tags
+    directory_path = ars_directory_path
+    output_excel_path = ars_output_excel_path
 
 # Function to extract tag from filename
 def extract_tag(filename, tags):

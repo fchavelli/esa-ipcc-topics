@@ -35,4 +35,8 @@ def convert_pdf_folder_to_txt(source_folder, target_folder):
 
 source_folder = './data/reports/pdf'
 target_folder = './data/reports/txt'
+
+source_folder = './data/reports/pdf/full_temp'
+target_folder = './data/reports/full'
+
 convert_pdf_folder_to_txt(source_folder, target_folder)

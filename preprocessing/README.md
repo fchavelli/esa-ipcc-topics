@@ -23,7 +23,7 @@ python ./preprocessing/pdf_to_txt.py
 
 ### Split content and references
 
-Report chapters in-text references have to be removed to not interfere in the counting process. The report txt files can be splitted into content and references using the following command. Note that manual check may be needed in case the chapter format is not as expected (content | references), typically for SRs. WGs chapters are processed correctly except for WG1 Chapter 1. Note that TS, SPM and SYR do not have in text references since they refer directly to report chapters.
+Report chapters in-text references have to be removed to not interfere in the counting process. The report txt files can be splitted into content and references using the following command. Note that manual check may be needed in case the chapter format is not as expected (content | references), typically for SRs. WGs chapters are processed correctly except for WG1 Chapter 1, WG3 Chapter 6 SM and WG3 Chapter 17 SM that don't have any reference section. Note that TS, SPM and SYR do not have in text references since they refer directly to report chapters.
 
 ```
 python ./preprocessing/split_chapter_references.py
