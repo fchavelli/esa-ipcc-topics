@@ -18,7 +18,7 @@ def process_xlsx_file(input_file, output_file):
 
     wb.save(output_file)
 
-def remove_empty_rows(input_file, output_file):
+def clean_xlsx_file(input_file, output_file):
     # Read the Excel file into a DataFrame
     df = pd.read_excel(input_file)
 
@@ -34,16 +34,6 @@ def remove_empty_rows(input_file, output_file):
     # Save the DataFrame to a new Excel file
     df.to_excel(output_file, index=False)
 
-# def remove_duplicates(input_file, output_file):
-#     # Read the Excel file into a DataFrame
-#     df = pd.read_excel(input_file)
-
-#     # Remove duplicates
-#     df.drop_duplicates(inplace=True)
-
-#     # Save the DataFrame to a new Excel file
-#     df.to_excel(output_file, index=False)
-
 # Create directory if it doesn't exist
 directory = "./data/online_references"
 
@@ -51,5 +41,5 @@ for filename in os.listdir(directory):
     if filename.endswith('.xlsx'):
         file_path = os.path.join(directory, filename)
         process_xlsx_file(file_path, file_path)
-        remove_empty_rows(file_path, file_path)
+        clean_xlsx_file(file_path, file_path)
         #remove_duplicates(file_path, file_path)

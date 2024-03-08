@@ -6,8 +6,8 @@ from bibtexparser.bibdatabase import BibDatabase
 from bibtexparser.bwriter import BibTexWriter
 
 # Specify the path to your Excel file
-bib_file_path = './data/references'
-excel_file_path = './data/online_references/srocc_ch3.xlsx'
+bib_file_path = './data/cci'
+excel_file_path = './data/cci/cci_papers.xlsx'
 excel_name = excel_file_path.split('/')[-1][:-5]
 
 # Specify the log level: 'INFO' or 'ERROR'
@@ -103,8 +103,16 @@ def process_bibtex_entry(item, project_field):
         'doi': item.get('DOI', 'No DOI'),
     }
     if project_field:
-        entry['project'] = str(project_field).title().rstrip() # Custom field for project
+        entry['project'] = process_project_name(str(project_field).title().rstrip()) # Custom field for project
     return entry
+
+def process_project_name(project):
+    if project == 'Ghg':
+        return 'Greenhouse Gases'
+    elif project in ['Reccap-2', 'Cmug', 'Ar5']:
+        return project.upper()
+    else:
+        return project
 
 # Initialize the BibTeX database
 db = BibDatabase()

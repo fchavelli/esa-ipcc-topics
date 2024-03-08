@@ -90,8 +90,8 @@ def process_files(folder_path, original_bib_path, report_tags):
     excel_writer.close()
 
 # Example usage
-folder_path = './data/references'
-original_bib_path = './data/references/cci_no_duplicates.bib'
-report_tags = ['wg1', 'wg2', 'wg3']
+folder_path = './data/references_no_duplicates'
+original_bib_path = './data/cci/cci_papers_no_duplicates.bib'
+report_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3']
 
 process_files(folder_path, original_bib_path, report_tags)

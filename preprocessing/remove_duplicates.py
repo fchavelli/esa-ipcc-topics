@@ -1,40 +1,80 @@
-import bibtexparser
+# Removes duplicate entries from BibTeX (.bib) files. It can process a single file or all files in a directory,
+# identifying duplicates by their unique 'ID' or by comparing all fields. The output is saved to a specified location, 
+# either as a modified single file or within a new directory for multiple files, with statistics on duplicates printed to the console.
 
-def remove_duplicates_from_bib(input_file, output_file):
-    """
-    Reads a BibTeX file, removes duplicate entries, and writes the unique entries to a new file.
-    
-    Parameters:
-    - input_file: Path to the input BibTeX file.
-    - output_file: Path where the output BibTeX file with deduplicated entries will be written.
-    
-    Returns:
-    - initial_count: The initial number of references in the input file.
-    - duplicates_count: The number of duplicate references found.
-    - new_count: The number of references in the new, deduplicated file.
-    """
+import os
+import glob
+import bibtexparser
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
+
+def remove_duplicates_from_bib_file(input_file, output_file):
     with open(input_file, encoding='utf-8') as bibtex_file:
         bib_database = bibtexparser.load(bibtex_file)
+        initial_count = len(bib_database.entries)
+        unique_entries = {}
+        for entry in bib_database.entries:
+            unique_entries[entry['ID']] = entry  # Assumes 'ID' is unique for each entry
+        
+        final_count = len(unique_entries)
+        duplicates_count = initial_count - final_count
 
-    initial_count = len(bib_database.entries)
-    # Convert each entry to a frozenset of its items to make them hashable and comparable
-    unique_entries = set(frozenset(entry.items()) for entry in bib_database.entries)
-    duplicates_count = initial_count - len(unique_entries)
-
-    # Convert the unique entry sets back to dictionaries
-    unique_entries_dicts = [dict(entry) for entry in unique_entries]
+        bib_database.entries = list(unique_entries.values())
+        writer = BibTexWriter()
+        with open(output_file, 'w', encoding='utf-8') as bibtex_out:
+            bibtex_out.write(writer.write(bib_database))
+        
+        return initial_count, duplicates_count, final_count
     
-    # Update the database with unique entries
-    bib_database.entries = unique_entries_dicts
-    new_count = len(bib_database.entries)
+def remove_complete_duplicates(bib_file_path, output_file_path):
+    with open(bib_file_path, encoding='utf-8') as bibtex_file:
+        bib_database = bibtexparser.load(bibtex_file)
+        initial_count = len(bib_database.entries)
+        unique_entries = []
 
-    with open(output_file, 'w', encoding='utf-8') as bibtex_file:
-        bibtexparser.dump(bib_database, bibtex_file)
+        for entry in bib_database.entries:
+            if entry not in unique_entries:
+                unique_entries.append(entry)
+
+        duplicates_count = initial_count - len(unique_entries)
+
+        # Create a new BibDatabase instance for the unique entries
+        unique_bib_database = BibDatabase()
+        unique_bib_database.entries = unique_entries
+
+        # Write the unique entries to the output file
+        writer = BibTexWriter()
+        with open(output_file_path, 'w', encoding='utf-8') as out_file:
+            out_file.write(writer.write(unique_bib_database))
     
-    return initial_count, duplicates_count, new_count
+    print(f'Initial number of references: {initial_count}')
+    print(f'Number of duplicates: {duplicates_count}')
+    print(f'Final number of references: {len(unique_entries)}')
 
-# Example usage
-input_file = 'data/references/output.bib'  # Change this to the path of your input BibTeX file
-output_file = 'data/references/oc_no_duplicates.bib'  # Change this to where you want to save the output file
-initial_count, duplicates_count, new_count = remove_duplicates_from_bib(input_file, output_file)
-print(f"Initial references: {initial_count}, Duplicates removed: {duplicates_count}, New references count: {new_count}")
+def process_folder(input_folder, output_folder):
+    os.makedirs(output_folder, exist_ok=True)
+    bib_files = glob.glob(f"{input_folder}/*.bib")
+    total_files = len(bib_files)
+
+    for i, input_file in enumerate(bib_files, start=1):
+        filename = os.path.basename(input_file)
+        output_file = os.path.join(output_folder, filename)
+        print(f'Processing file {i}/{total_files}: {filename}')
+        
+        initial_count, duplicates_count, final_count = remove_duplicates_from_bib_file(input_file, output_file)
+        print(f'Initial number of references: {initial_count}')
+        print(f'Number of duplicates: {duplicates_count}')
+        print(f'Final number of references: {final_count}')
+        print('-'*30)
+
+# Example usage:
+task = 'file_complete'                               # Choose from 'file', 'file_complete', 'folder'
+input = './data/cci/cci_papers.bib'                  # Update this with the path to your .bib file or folder containing .bib files
+output = './data//cci/cci_papers_no_duplicates.bib'  # Update this with the path to the file or folder where you want to save the new .bib files
+
+if task == 'file':
+    remove_duplicates_from_bib_file(input, output)
+elif task == 'file_complete':
+    remove_complete_duplicates(input, output)
+elif task == 'folder':
+    process_folder(input, output)

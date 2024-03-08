@@ -56,7 +56,7 @@ Sea level       | Famiglietti J S (2015) Satellites provide the...
 ...             | ...
 ```
 
-Create the reference file from the Excel document and optionally remove any duplicates and sanitise project names from the bib file using the following command.
+Create the reference file from the Excel document and optionally remove any duplicates and sanitise project names from the bib file using the following command. The `remove_duplicates` function allows to remove duplicates from a single file or all files in a given folder. Duplicates can either be entries with the same `ID` or entries with all indentical fields (useful to keep duplicate references associated with different Projects).
 
 ```python
 python get_references.py
