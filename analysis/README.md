@@ -1,21 +1,23 @@
 # Analysis of ESA-IPCC topics : ECVs and references
 
 ## Foundation analysis
-- Run `ecvs_in_reports.py` to compute and save the ECV count for each chapter
+- Run `terms_in_reports.py` to compute and save search terms count for each chapter
 - Run `references.py` to extract and save the matching CCI & IPCC references
 
-## Visualisation
+## Deprecated
+
+### Visualisation
 Several tools allow to present the data:
 
-### ECVs
+#### ECVs
 - ECVs count in all AR6 reports: `plot_ecvs_count.py`
 - Top ECVs count in each AR6 chapter: `plot_chapters_vs_ecvs.py` or `plot_ecvs_vs_chapters.py`
 - Top ECVs count in each AR6 reports: `plot_reports_vs_ecvs.py`
 
-### References
+#### References
 - Count of CCI Projects in matching CCI-IPCC references: `plot_references.py`
 
-### Details
+#### Details
 
-#### ECVs count
+##### ECVs count
 The list of ECVs is defined in `cci_topics.py` together with their categories and aliases. It is saved in a json document for analysis and in an Excel document for display.
