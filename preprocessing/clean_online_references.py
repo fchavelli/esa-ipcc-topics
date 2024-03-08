@@ -44,7 +44,7 @@ def remove_empty_rows(input_file, output_file):
 #     # Save the DataFrame to a new Excel file
 #     df.to_excel(output_file, index=False)
 
-# Create directories if they don't exist
+# Create directory if it doesn't exist
 directory = "./data/online_references"
 
 for filename in os.listdir(directory):
