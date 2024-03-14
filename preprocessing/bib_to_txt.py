@@ -18,16 +18,27 @@ def parse_bib_files(folder_path, filename_tag):
 
     return all_dois
 
-def write_dois_to_txt(dois, file_path):
+def write_dois_to_txt(dois, file_path, total_file_path=False):
     with open(file_path, 'w', encoding='utf-8') as txt_file:
         for doi in dois:
             txt_file.write(doi + '\n')
+    if total_file_path:
+        with open(total_file_path, 'a', encoding='utf-8') as txt_file:
+            for doi in dois:
+                txt_file.write(doi + '\n')
 
-folder_path = './data/references' # Update this with the path to your folder
-filename_tag = 'sr15' # Update this with the tag to filter filenames
-txt_file_path = 'sr15.txt'
+report_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3']
 
-dois = parse_bib_files(folder_path, filename_tag)
-write_dois_to_txt(dois, txt_file_path)
+folder_path = './results' # Update this with the path to your folder
+total_file_path = f'./results/matched_dois_ar6.txt'
 
-print(f'Total number of DOIs: {len(dois)}')
+n_dois = 0
+for tag in report_tags:
+    txt_file_path = f'./results/matched_dois_{tag}.txt'
+    dois = parse_bib_files(folder_path, tag)
+    n_dois += len(dois)
+    write_dois_to_txt(dois, txt_file_path, total_file_path)
+    print(f'Total number of DOIs in {tag}: {len(dois)}')
+
+if total_file_path:
+    print(f'Total number of DOIs in ar6: {n_dois}')
