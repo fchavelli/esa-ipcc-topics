@@ -148,7 +148,7 @@ ecv_aliases = {"precipitation" : [],
 projects = ["Aerosol", "Biomass", "Climate Modelling User Group (CMUG)", "Cloud", "Fire", "Greenhouse Gases (GHGs)", "Glaciers", "High Resolution Land Cover", "Ice Sheets (Antarctic)", "Ice Sheets (Greenland)", "Lakes", "Land Cover", "Land Surface Temperature", "Ocean Colour", "Ozone", "Permafrost", "Precursors for aerosols and ozone", "RECCAP-2", "River Discharge", "Sea Ice", "Sea Level", "Sea Level Budget Closure", "Sea State", "Sea Surface Salinity", "Sea Surface Temperature", "Snow", "Soil Moisture", "Vegetation Parameters", "Water Vapour"]
 
 project_aliases = {
-               "aerosol" : [],
+               "aerosol" : ['black carbon', 'particular matter', 'pm2.5', 'pm10'],
                "anthropogenic water use" : [],
                "biomass" : [],
                "CMUG" : ["Climate Modelling User Group", "climate modelling user group"],
@@ -161,7 +161,7 @@ project_aliases = {
                "lake" : [],
                "land cover" : [],
                "land surface temperature" : ["lands surface temperature"],
-               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance", "nitrous oxide", "N2O", "N 2O", "N₂O", "sulphur hexafluoride", "SF6", "SF 6", "SF₆", "other greenhouse gas", "other GHG", "halogenated carbon compound", "chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon"],
+               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance", "nitrous oxide", "N2O", "N 2O", "N₂O", "sulphur hexafluoride", "SF6", "SF 6", "SF₆", "other greenhouse gas", "other GHG", "halogenated carbon compound", "chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon", "HFC", "PFC", "CFC"], # "HCFC" accounted for with "CFC"
                "ocean colour" : ["oceans colour"],
                "ozone" : ["O3", "O 3", "O₃"],
                "permafrost" : [],
@@ -170,7 +170,7 @@ project_aliases = {
                "river discharge" : ["rivers discharge"],
                "sea ice" : [],
                "sea level" : ["seas level"],
-               "sea level budget closure" : [],
+               "sea level budget closure" : ["slbc", "sea level budget"],
                "sea state" : ["seas state"],
                "sea surface salinity" : ["seas surface salinity"],
                "sea surface temperature" : ["seas surface temperature"],
@@ -178,6 +178,13 @@ project_aliases = {
                "soil moisture" : [],
                "vegetation parameters" : ["FAPAR", "fraction of absorbed photosynthetically active radiation", "leaf area index"],
                "water vapour" : ["water vapor"],
+}
+
+other_search_terms = {
+    "carbon dioxide" : ["CO2", "CO 2", "CO₂"],
+    "methane" : ["CH4", "CH 4", "CH₄"],
+    "sulphur hexafluoride" : ["SF6", "SF 6", "SF₆"],
+    "halogenated carbon compound" : ["chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon", "HFC", "PFC", "CFC"]
 }
 
 CMIP6 = {
@@ -207,6 +214,7 @@ def merge_dicts(dict1, dict2):
     return merged_dict
 
 search_terms = merge_dicts(ecv_aliases, project_aliases)
+search_terms = merge_dicts(search_terms, other_search_terms)
 
 with open("./data/cci/search_terms.json", "w") as f:
     json.dump(search_terms, f)
