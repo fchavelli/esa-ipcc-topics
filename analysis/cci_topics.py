@@ -148,24 +148,24 @@ ecv_aliases = {"precipitation" : [],
 projects = ["Aerosol", "Biomass", "Climate Modelling User Group (CMUG)", "Cloud", "Fire", "Greenhouse Gases (GHGs)", "Glaciers", "High Resolution Land Cover", "Ice Sheets (Antarctic)", "Ice Sheets (Greenland)", "Lakes", "Land Cover", "Land Surface Temperature", "Ocean Colour", "Ozone", "Permafrost", "Precursors for aerosols and ozone", "RECCAP-2", "River Discharge", "Sea Ice", "Sea Level", "Sea Level Budget Closure", "Sea State", "Sea Surface Salinity", "Sea Surface Temperature", "Snow", "Soil Moisture", "Vegetation Parameters", "Water Vapour"]
 
 project_aliases = {
-               "aerosol" : ['black carbon', 'particular matter', 'pm2.5', 'pm10'],
+               "aerosol" : [],
                "anthropogenic water use" : [],
                "biomass" : [],
                "CMUG" : ["Climate Modelling User Group", "climate modelling user group"],
                "cloud" : [],
                "fire" : [],
-               "greenhouse gases" : ["carbon dioxide", "CO2", "CO 2", "CO₂", "methane", "CH4", "CH 4", "CH₄"],
+               "greenhouse gas" : [], # CO2 and CH4 are accounted for separately
                "glacier" : [],
                "high resolution land cover" : [],
                "ice sheet" : [],
                "lake" : [],
                "land cover" : [],
                "land surface temperature" : ["lands surface temperature"],
-               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance", "nitrous oxide", "N2O", "N 2O", "N₂O", "sulphur hexafluoride", "SF6", "SF 6", "SF₆", "other greenhouse gas", "other GHG", "halogenated carbon compound", "chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon", "HFC", "PFC", "CFC"], # "HCFC" accounted for with "CFC"
+               "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance"],
                "ocean colour" : ["oceans colour"],
                "ozone" : ["O3", "O 3", "O₃"],
                "permafrost" : [],
-               "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone", "nitrogen dioxide", "N2O", "N 2O", "N₂O", "sulphur dioxide", "SO2", "SO 2", "SO₂", "carbon monoxide", "formaldehyde", "HCHO", "ammonia", "NH3", "NH 3", "NH₃"],
+               "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone"],
                "RECCAP-2" : ['reccap', 'RECCAP'],
                "river discharge" : ["rivers discharge"],
                "sea ice" : [],
@@ -176,15 +176,30 @@ project_aliases = {
                "sea surface temperature" : ["seas surface temperature"],
                "snow" : [],
                "soil moisture" : [],
-               "vegetation parameters" : ["FAPAR", "fraction of absorbed photosynthetically active radiation", "leaf area index"],
+               "vegetation parameters" : [],
                "water vapour" : ["water vapor"],
 }
 
 other_search_terms = {
     "carbon dioxide" : ["CO2", "CO 2", "CO₂"],
     "methane" : ["CH4", "CH 4", "CH₄"],
+    "nitrous oxide" : ["N2O", "N 2O", "N₂O"],
+    "other greenhouse gas" : ["other GHG"],
     "sulphur hexafluoride" : ["SF6", "SF 6", "SF₆"],
-    "halogenated carbon compound" : ["chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon", "HFC", "PFC", "CFC"]
+    "nitrogen dioxide" : ["NO2", "NO 2", "NO₂"],
+    "sulphur dioxide" : ["SO2", "SO 2", "SO₂"],
+    "carbon monoxide" : [],
+    "formaldehyde" : ["HCHO"],
+    "ammonia" : ["NH3", "NH 3", "NH₃"],
+    "black carbon" : [],
+    "particulate matter" : ['pm2.5', 'pm10'],
+    "halogenated carbon compound" : ["chlorofluorocarbon", "hydrofluorocarbon", "hydrochlorofluorocarbon", "perfluorocarbon", "HFC", "PFC", "CFC"] # "HCFC" accounted for with "CFC"
+}
+
+context_search_terms = {
+    "Copernicus Climate Change Service" : ['C3S'],
+    "ERA-Interim" : ["ERA4", "ERA-4", "ERA5", "ERA-5"],
+    "ECMWF" : ["European Centre for Medium-Range Weather Forecasts"]
 }
 
 CMIP6 = {
@@ -215,6 +230,7 @@ def merge_dicts(dict1, dict2):
 
 search_terms = merge_dicts(ecv_aliases, project_aliases)
 search_terms = merge_dicts(search_terms, other_search_terms)
+search_terms = merge_dicts(search_terms, context_search_terms)
 
 with open("./data/cci/search_terms.json", "w") as f:
     json.dump(search_terms, f)

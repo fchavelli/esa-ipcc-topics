@@ -4,7 +4,7 @@ import re
 import json
 import pandas as pd
 
-analysis = 'ars' # Choose between 'ar6' or 'ars
+analysis = 'ar6' # Choose between 'ar6' or 'ars
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
