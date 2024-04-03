@@ -7,7 +7,7 @@ from bibtexparser.bwriter import BibTexWriter
 
 # Specify the path to your Excel file
 bib_file_path = './data/cci'
-excel_file_path = './data/cci/cci_papers.xlsx'
+excel_file_path = './data/cci/cci_oc_papers.xlsx'
 excel_name = excel_file_path.split('/')[-1][:-5]
 
 # Specify the log level: 'INFO' or 'ERROR'

@@ -8,7 +8,7 @@ def clean_project_field(input_path, output_path):
                 key, value = line.split('=', 1)
                 # Remove surrounding spaces and braces, then convert to lowercase for case-insensitive comparison
                 cleaned_value = value.strip().lower().rstrip()
-                if 'ghg' in cleaned_value or 'reccap-2' in cleaned_value  or 'cmug' in cleaned_value or 'ar5' in cleaned_value:
+                if 'ghg' in cleaned_value or 'reccap-2' in cleaned_value  or 'cmug' in cleaned_value or 'ar5' in cleaned_value or 'sst' in cleaned_value:
                     cleaned_value = cleaned_value.upper()
                 elif 'nan' in cleaned_value:
                     cleaned_value = ''
