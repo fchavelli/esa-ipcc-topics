@@ -68,9 +68,15 @@ def process_folder(input_folder, output_folder):
         print('-'*30)
 
 # Example usage:
-task = 'file_complete'                               # Choose from 'file', 'file_complete', 'folder'
-input = './data/cci/cci_papers.bib'                  # Update this with the path to your .bib file or folder containing .bib files
-output = './data//cci/cci_papers_no_duplicates.bib'  # Update this with the path to the file or folder where you want to save the new .bib files
+
+# Choose from 'file', 'file_complete', 'folder'
+# If 'file', duplicate entries are entries with common ID
+# If 'file_complete', duplicate are entries with every field identical
+task = 'file_complete'
+# Update this with the path to your .bib file or folder containing .bib files                       
+input = './data/cci/cci_papers_merged.bib'
+# Update this with the path to the file or folder where you want to save the new .bib files
+output = './data/cci/cci_papers_merged_no_duplicates.bib'
 
 if task == 'file':
     remove_duplicates_from_bib_file(input, output)

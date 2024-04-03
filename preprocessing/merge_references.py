@@ -1,36 +1,46 @@
 import bibtexparser
+from bibtexparser.bwriter import BibTexWriter
 
-# Load the BibTeX file where entries will be added (cci_papers_website.bib)
-with open('./data/cci/cci_papers_website_copy.bib', encoding='utf8') as bibtex_file:
-    bib_database_website = bibtexparser.load(bibtex_file)
+def load_bibtex_file(filepath):
+    with open(filepath, encoding='utf-8') as bibtex_file:
+        return bibtexparser.load(bibtex_file)
 
-# Convert entries to a dictionary for easier search by DOI
-website_entries_by_doi = {entry.get('doi'): entry for entry in bib_database_website.entries}
+def save_bibtex_file(database, filepath):
+    writer = BibTexWriter()
+    with open(filepath, 'w', encoding='utf-8') as bibtex_file:
+        bibtex_file.write(writer.write(database))
 
-# Load the BibTeX file with new entries (cci_papers.bib)
-with open('./data/cci/cci_papers_no_duplicates.bib', encoding='utf8') as bibtex_file:
-    bib_database_new = bibtexparser.load(bibtex_file)
+# Load the BibTeX databases
+website_db = load_bibtex_file('./data/cci/cci_papers_website_complete.bib')
+new_entries_db = load_bibtex_file('./data/cci/cci_papers_no_duplicates.bib')
 
-# Prepare a list for entries to be added
-entries_to_add = []
+# Prepare counters
+added_new_entries_count = 0
+added_updated_entries_count = 0
 
-# Check each entry in the new database
-for entry in bib_database_new.entries:
-    doi = entry.get('doi')
-    project = entry.get('project', '')
-    
-    # Check if DOI exists in the website database and if the project field is different when 'project' is {}
-    if doi not in website_entries_by_doi or (website_entries_by_doi[doi].get('project', '') == '' and project != ''):
-        entries_to_add.append(entry)
-        print(entry.get('doi'))
-        print(entry.get('title', ''))
-        print(entry.get('project', ''))
+# Mapping of DOIs to IDs for existing entries
+existing_dois = {entry['doi']: entry for entry in website_db.entries if 'doi' in entry}
 
-# Add new entries to the website database
-bib_database_website.entries.extend(entries_to_add)
+for entry in new_entries_db.entries:
+    if 'doi' in entry:
+        doi = entry['doi']
+        project = entry.get('project', None)
+        # Check if the DOI is new or if the project is different and not empty
+        if doi not in existing_dois:
+            website_db.entries.append(entry)
+            added_new_entries_count += 1
+        else:
+            existing_entry = existing_dois[doi]
+            # Add the entry if the project field is different, not empty, or not present
+            if (project != existing_entry.get('project') and project) or ('project' not in existing_entry):
+                # Modify entry ID to include project name if it's specified
+                if project:
+                    entry['ID'] = f"{entry['ID']}_{project.replace(' ', '_')}"
+                website_db.entries.append(entry)
+                added_updated_entries_count += 1
 
-# Write the updated database back to the file
-with open('./data/cci/cci_papers_website_updated.bib', 'w', encoding='utf8') as bibtex_file:
-    bibtexparser.dump(bib_database_website, bibtex_file)
+# Save the updated database
+save_bibtex_file(website_db, './data/cci/cci_papers_merged.bib')
 
-print(f"Added {len(entries_to_add)} new entries to cci_papers_website.bib.")
+print(f"New entries added: {added_new_entries_count}")
+print(f"Entries with updated IDs added: {added_updated_entries_count}")
