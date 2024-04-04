@@ -72,7 +72,7 @@ def process_folder(input_folder, output_folder):
 # Choose from 'file', 'file_complete', 'folder'
 # If 'file', duplicate entries are entries with common ID
 # If 'file_complete', duplicate are entries with every field identical
-task = 'file_complete'
+task = 'file'
 # Update this with the path to your .bib file or folder containing .bib files                       
 input = './data/cci/cci_papers_merged.bib'
 # Update this with the path to the file or folder where you want to save the new .bib files
