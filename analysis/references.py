@@ -91,7 +91,7 @@ def process_files(folder_path, original_bib_path, report_tags):
 
 # Example usage
 folder_path = './data/references_no_duplicates'
-original_bib_path = './data/cci/cci_papers_merged_no_duplicates.bib'
+original_bib_path = './data/cci/cci_papers_merged.bib'
 report_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3']
 
 process_files(folder_path, original_bib_path, report_tags)

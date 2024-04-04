@@ -76,7 +76,7 @@ task = 'file_complete'
 # Update this with the path to your .bib file or folder containing .bib files                       
 input = './data/cci/cci_papers_merged.bib'
 # Update this with the path to the file or folder where you want to save the new .bib files
-output = './data/cci/cci_papers_merged_no_duplicates.bib'
+output = input[:-4] + '_no_duplicates.bib'
 
 if task == 'file':
     remove_duplicates_from_bib_file(input, output)
