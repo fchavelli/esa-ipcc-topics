@@ -3,6 +3,7 @@
 ## Foundation analysis
 - Run `terms_in_reports.py` to compute and save search terms count for each chapter
 - Run `references.py` to extract and save the matching CCI & IPCC references
+- Run `references_refine.py` to add chapter(s) data of each matching CCI & IPCC reference
 
 ## Deprecated
 
