@@ -163,7 +163,7 @@ project_aliases = {
                "land surface temperature" : ["lands surface temperature"],
                "LOLIPOP" : ["LOng-LIved greenhouse gas PrOducts Performances", "long-lived greenhouse gas products performance"],
                "ocean colour" : ["oceans colour"],
-               "ozone" : ["O3", "O 3", "O₃"],
+               "ozone" : [" O3", " O 3", "O₃"],
                "permafrost" : [],
                "precursors for aerosols and ozone" : ["precursor for aerosol", "precursors for aerosol", "precursor for ozone", "precursors for ozone"],
                "RECCAP-2" : ['reccap', 'RECCAP'],
