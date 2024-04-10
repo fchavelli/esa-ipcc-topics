@@ -11,7 +11,7 @@ def remove_duplicates(input_file, output_file):
         f.writelines(unique_lines)
 
 # Example usage
-input_file = 'input.txt'  # Replace 'input.txt' with your input file name
-output_file = 'output.txt'  # Replace 'output.txt' with your desired output file name
+input_file = './results/dois/ar6_dois_wg2.txt'  # Replace 'input.txt' with your input file name
+output_file = './results/dois/ar6_dois_wg2_no_duplicates.txt'  # Replace 'output.txt' with your desired output file name
 
 remove_duplicates(input_file, output_file)
