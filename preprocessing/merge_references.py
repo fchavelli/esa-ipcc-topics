@@ -1,3 +1,10 @@
+"""
+Merge two bibliography (.bib) files by complementing one (cci_papers_website) with the other (cci_papers)
+Add entries from cci_papers if:
+- No entry with the same DOI is found
+- An entry with the same DOI is found but with a different non empty 'project' field
+"""
+
 import bibtexparser
 from bibtexparser.bwriter import BibTexWriter
 from collections import defaultdict

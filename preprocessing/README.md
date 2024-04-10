@@ -18,7 +18,7 @@ Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, 
 Once pdf files are downloaded, they can be converted to txt files using the following command. The text in tables and figures are read when available (e.g. WG1 Chapter 1, Fig 1.1). Note that the process can take a few minutes.
 
 ```
-python ./preprocessing/pdf_to_txt.py
+python ./utils/pdf_to_txt.py
 ```
 
 ### Split content and references
@@ -63,6 +63,8 @@ python get_references.py
 python remove_duplicates.py
 python sanitise_project_names.py
 ```
+
+## Deprecated
 
 Create ECV objects with names, associated CCI project, custom search terms, aliases, displays etc in `cci_topics.py` and run the following command to create objects.
 

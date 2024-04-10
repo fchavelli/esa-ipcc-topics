@@ -29,12 +29,12 @@ def write_dois_to_txt(dois, file_path, total_file_path=False):
 
 report_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3']
 
-folder_path = './results' # Update this with the path to your folder
-total_file_path = f'./results/matched_dois_ar6.txt'
+folder_path = './data/references_no_duplicates' # Update this with the path to your folder
+total_file_path = f'./results/dois/ar6_dois_full.txt'
 
 n_dois = 0
 for tag in report_tags:
-    txt_file_path = f'./results/matched_dois_{tag}.txt'
+    txt_file_path = f'./results/dois/ar6_dois_{tag}.txt'
     dois = parse_bib_files(folder_path, tag)
     n_dois += len(dois)
     write_dois_to_txt(dois, txt_file_path, total_file_path)
