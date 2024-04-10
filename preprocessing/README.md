@@ -63,11 +63,3 @@ python get_references.py
 python remove_duplicates.py
 python sanitise_project_names.py
 ```
-
-## Deprecated
-
-Create ECV objects with names, associated CCI project, custom search terms, aliases, displays etc in `cci_topics.py` and run the following command to create objects.
-
-```python
-python ./utils/ecvs.py
-```
