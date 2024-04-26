@@ -19,7 +19,7 @@ def find_citations(text, regex, doi, chapter):
             current_section = section_match.group(1)
             section_name = section_match.group(3)
         
-        if re.search(regex, line, re.IGNORECASE):
+        if re.search(regex, line):
             if current_section != None:
                 if len(current_section) > 1:
                     print(current_section,section_name,line)
