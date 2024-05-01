@@ -31,11 +31,11 @@ python ./preprocessing/split_chapter_references.py
 
 ### Parse report SPMs
 
-Use `parse_spm.py` code to parse SPM .txt file into objects with attributes `Section`, `Content` and `References` as in the following example.
+Use `parse_spm.py` code to parse SPM .txt files into objects with attributes `Section`, `Content` and `References` as in the following example.
 ```
 Section: A.1
-Content: It is unequivocal that human influence has warmed the atmosphere, ocean and land. Widespread and rapid changes in the atmosphere, ocean, cryosphere and biosphere have occurred. 
-References: ['2.2', '2.3', 'Cross-Chapter Box 2.3', '3.3', '3.4', '3.5', '3.6', '3.8', '5.2', '5.3', '6.4', '7.3', '8.3', '9.2', '9.3', '9.5', '9.6', 'Cross-Chapter Box 9.1']
+Content: It is unequivocal that human influence has warmed the atmosphere, ocean and land...
+References: ['2.2', '2.3', 'Cross-Chapter Box 2.3', '3.3', '3.4', '3.5', '3.6', '3.8', ...]
 ```
 
 ## IPCC references
