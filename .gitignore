@@ -1,4 +1,6 @@
 env/
+env-nlp/
+nlp/
 temp/
 plots/
 results/

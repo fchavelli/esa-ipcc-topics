@@ -22,7 +22,7 @@ def find_citations(text, regex, doi, chapter):
         if re.search(regex, line):
             if current_section != None:
                 if len(current_section) > 1:
-                    print(current_section,section_name,line)
+                    print(current_section,section_name)
                     found_citations.append({
                         'DOI': doi,
                         'Section': current_section,
@@ -69,8 +69,8 @@ def process_reports(excel_path, text_directory, output_path):
 
     writer._save()
 
-excel_path = './data/cci/matched_references_unique_formated.xlsx'
-text_directory = './data/reports/txt'
-output_path = './results/matched_references_sections.xlsx'
+excel_path = './data/cci/matched_references_unique_formated_wg1.xlsx'
+text_directory = './data/reports/content_v2'
+output_path = './results/matched_references_sections_wg1.xlsx'
 process_reports(excel_path, text_directory, output_path)
 
