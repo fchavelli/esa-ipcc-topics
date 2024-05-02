@@ -1,3 +1,12 @@
+"""
+Input:
+- Multisheet spreadsheet containing SPM sections ID, content, references to report sections, and CCI references supporting each report section
+- Multisheet spreadsheet containing CCI references metadata (First Author, Title, Year, Journal, DOI) as well as CCI Project(s)
+
+Output:
+- PDF document with custom header displaying each SPM sections with its ID, content, references to report section and CCI references with associated projects
+"""
+
 import pandas as pd
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
@@ -49,6 +58,7 @@ def create_pdf(data_file, ref_file, output_file):
     # Add title and subtitle
     story.append(Paragraph("ESA Climate Change Initiative Project publications supporting IPCC AR6 WG1 SPM statements", title_style))
     story.append(Paragraph("Mapping CCI references and projects in WG1 sections supporting SPM statements", subtitle_style))
+    #story.append(Paragraph("Analysis of 85 ESA CCI references appearing in IPCC AR6 WG1 report sections supporting SPM statements. Each reference is tagged with one or several CCI project(s).", justified_style))
 
     for index, row in df.iterrows():
         story.append(Paragraph(f"<b>{row['SPM section']}</b>", header_style))

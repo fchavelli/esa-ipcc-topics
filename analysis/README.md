@@ -5,6 +5,7 @@
 - Run `references.py` to extract and save the matching CCI & IPCC references
 - Run `references_chapters.py` to add chapter(s) of each matching CCI & IPCC reference
 - Run `references_spm.py` to identify matching CCI & IPCC references for each SPM section
+- Run `spm_sections.py` to display CCI references and projects supporting SPM statements
 
 ## Deprecated
 
