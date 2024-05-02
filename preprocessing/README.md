@@ -29,13 +29,12 @@ Report chapters in-text references have to be removed to not interfere in the co
 python ./preprocessing/split_chapter_references.py
 ```
 
-### Parse report SPMs
+### Parse SPMs
 
-Use `parse_spm.py` code to parse SPM .txt files into objects with attributes `Section`, `Content` and `References` as in the following example.
+Use `parse_spm.py` code to parse SPM .txt files in a Excel spreadsheet with `Section`, `Content` and `References` columns as in the following example.
 ```
-Section: A.1
-Content: It is unequivocal that human influence has warmed the atmosphere, ocean and land...
-References: ['2.2', '2.3', 'Cross-Chapter Box 2.3', '3.3', '3.4', '3.5', '3.6', '3.8', ...]
+Section     Content                             References
+A.1         It is unequivocal that human...     ['2.2', '2.3', ...]
 ```
 
 ## IPCC references

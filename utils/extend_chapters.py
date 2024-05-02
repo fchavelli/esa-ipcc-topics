@@ -1,3 +1,17 @@
+""" 
+Input: Matching ESA CCI-IPCC references with unique references (several Projects and Chapters in the same row)
+Output: Matching ESA CCI-IPCC references with one row per chapter (still several Projects in the same row)
+
+Example:
+
+Project             DOI                             Chapters
+Soil Moisture	    10.1038/nature11377     ...     10;11
+
+Project             DOI                             Chapter
+Soil Moisture	    10.1038/nature11377     ...     10
+Soil Moisture	    10.1038/nature11377	    ...     11
+"""
+
 import pandas as pd
 
 def expand_chapters(data_frame):
