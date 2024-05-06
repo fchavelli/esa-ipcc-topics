@@ -93,6 +93,7 @@ def create_pdf(data_file, ref_file, output_file):
         story.append(Spacer(1, 24))
 
     doc.build(story)
+    print(f"Processed document saved to {output_file}")
 
 # File paths
 data_file = './results/cci_references_spm_sections.xlsx'
