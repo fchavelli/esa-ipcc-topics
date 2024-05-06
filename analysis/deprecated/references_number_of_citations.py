@@ -6,6 +6,7 @@ def count_citations(text, pattern):
         with open(text, 'r', encoding='utf-8') as file:
             content = file.read()
             matches = re.findall(pattern, content, re.DOTALL)  # Include re.DOTALL to handle line jumps
+            print(matches)
             return len(matches)
     except FileNotFoundError:
         print(f"Warning: The file {text} was not found.")
