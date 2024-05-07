@@ -1,3 +1,23 @@
+"""
+This script provides functions to process bibliographic references in .bib format.
+It can read a .bib file, filter entries based on DOIs, create Excel sheets for specific tags,
+and save matching entries to new .bib files.
+
+Functions:
+- read_bib_file(filepath): Read a .bib file and return its content.
+- find_files_with_tag(folder_path, tag): Find all .bib files in the given folder that contain the tag in their name.
+- filter_entries_by_doi(bib_database, dois): Filter entries in a bib_database that have a DOI matching any in the list 'dois'.
+- create_excel_sheet(writer, tag, entries): Create an Excel sheet for the given tag with the provided entries.
+- process_files(folder_path, original_bib_path, report_tags): Process the .bib files in the specified folder based on the given tags.
+
+Example usage:
+folder_path = './data/references_no_duplicates'
+original_bib_path = './data/cci/cci_papers_merged.bib'
+report_tags = ['sr15', 'srccl', 'srocc', 'wg1', 'wg2', 'wg3']
+
+process_files(folder_path, original_bib_path, report_tags)
+"""
+
 import os
 import logging
 import bibtexparser

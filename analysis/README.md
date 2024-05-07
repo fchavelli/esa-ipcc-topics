@@ -6,6 +6,7 @@
 - Run `references_chapters.py` to add chapter(s) of each matching CCI & IPCC reference
 - Run `references_spm.py` to identify matching CCI & IPCC references for each SPM section
 - Run `spm_sections.py` to display CCI references and projects supporting SPM statements
+- Run `references_text_citations.py` to count in-text citations of CCI references in IPCC reports
 
 ## Deprecated
 

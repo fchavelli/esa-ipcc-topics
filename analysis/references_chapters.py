@@ -1,3 +1,23 @@
+"""
+This script processes an Excel file containing multiple sheets and adds a 'Chapters' column to each sheet.
+The 'Chapters' column is populated by searching for chapter numbers in corresponding .bib files.
+
+The script contains the following functions:
+- extract_chapter_number(bib_filename): Extracts the chapter number from a .bib file name.
+- doi_exists_in_bib(doi, bib_content): Checks if a DOI exists in the content of a .bib file.
+- process_sheet(sheet_name, doi_column, folder_path): Processes each sheet in the Excel file
+  and returns a comma-separated string of chapter numbers found in the corresponding .bib files.
+- process_excel(file_path, output_path, folder_path): Processes each sheet in the Excel file,
+  adds the 'Chapters' column, and saves the updated Excel file.
+
+Example usage:
+- input_excel_path: Path to the input Excel file.
+- output_excel_path: Path to save the output Excel file.
+- bib_folder_path: Path to the folder containing the .bib files.
+
+Note: This script requires the pandas library to be installed.
+"""
+
 import os
 import pandas as pd
 import logging
@@ -6,16 +26,43 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# Function to extract chapter number from bib file name
 def extract_chapter_number(bib_filename):
+    """
+    Extracts the chapter number from a .bib file name.
+
+    Args:
+        bib_filename (str): The name of the .bib file.
+
+    Returns:
+        str: The extracted chapter number.
+    """
     return bib_filename.split('ch')[-1].split('.')[0]
 
-# Function to check if DOI exists in bib file
 def doi_exists_in_bib(doi, bib_content):
+    """
+    Checks if a DOI exists in the content of a .bib file.
+
+    Args:
+        doi (str): The DOI to check.
+        bib_content (str): The content of the .bib file.
+
+    Returns:
+        bool: True if the DOI exists, False otherwise.
+    """
     return doi in bib_content
 
-# Function to process each sheet in Excel file
 def process_sheet(sheet_name, doi_column, folder_path):
+    """
+    Processes each sheet in the Excel file and returns a comma-separated string of chapter numbers found in the corresponding .bib files.
+
+    Args:
+        sheet_name (str): The name of the sheet.
+        doi_column (str): The name of the DOI column in the sheet.
+        folder_path (str): The path to the folder containing the .bib files.
+
+    Returns:
+        str: A comma-separated string of chapter numbers found in the .bib files.
+    """
     bib_files = [file for file in os.listdir(folder_path) if file.endswith('.bib') and sheet_name in file]
 
     chapters = []
@@ -30,8 +77,15 @@ def process_sheet(sheet_name, doi_column, folder_path):
 
     return ','.join(chapters) if chapters else None
 
-# Function to process each sheet in Excel file and add 'Chapters' column
 def process_excel(file_path, output_path, folder_path):
+    """
+    Processes each sheet in the Excel file, adds the 'Chapters' column, and saves the updated Excel file.
+
+    Args:
+        file_path (str): The path to the input Excel file.
+        output_path (str): The path to save the output Excel file.
+        folder_path (str): The path to the folder containing the .bib files.
+    """
     df = pd.read_excel(file_path, sheet_name=None)
     writer = pd.ExcelWriter(output_path)
 

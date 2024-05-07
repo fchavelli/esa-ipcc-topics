@@ -1,3 +1,39 @@
+"""
+This script performs a search for specific terms in a collection of text files.
+It allows the user to choose between two types of analysis: 'ar6' or 'ars'.
+The script loads a set of search terms and their aliases from a JSON file,
+and then searches for these terms in the text files located in the specified directories. 
+The results are written to separate sheets in an Excel file.
+
+The script follows the following steps:
+1. Setup logging configuration.
+2. Load search terms and their aliases from a JSON file.
+3. Define the directories and output paths based on the selected analysis type.
+4. Prepare regex patterns for the search terms.
+5. Define the tags based on the selected analysis type.
+6. Define a function to extract tags from filenames.
+7. Group the files by tag.
+8. Initialize an Excel writer.
+9. Iterate over the tags and files, and search for the terms in the files.
+10. Write the results to separate sheets in the Excel file.
+11. Sort the columns in the Excel file.
+12. Remove the temporary file.
+13. Log the completion of the search.
+
+Note: The script assumes that the necessary directories and files exist.
+"""
+
+import logging
+import os
+import re
+import json
+import pandas as pd
+
+# Rest of the code...
+"""
+
+"""
+
 import logging
 import os
 import re

@@ -1,3 +1,11 @@
+"""
+Input:
+- Multisheet spreadsheet containing detailed sections in which CCI references appear
+
+Output:
+- Spreadsheet containing the count of CCI publications in each section of the desired report
+"""
+
 import pandas as pd
 
 input_file = './data/cci/matched_references_unique_curated.xlsx'
