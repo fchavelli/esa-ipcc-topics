@@ -199,7 +199,8 @@ other_search_terms = {
 context_search_terms = {
     "Copernicus Climate Change Service" : ['C3S'],
     "ERA-Interim" : ["ERA4", "ERA-4", "ERA5", "ERA-5"],
-    "ECMWF" : ["European Centre for Medium-Range Weather Forecasts"]
+    "ECMWF" : ["European Centre for Medium-Range Weather Forecasts"],
+    "EUMETSAT" : ["European Organisation for the Exploitation of Meteorological Satellites"]
 }
 
 cmip_search_terms = {

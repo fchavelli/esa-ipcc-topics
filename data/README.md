@@ -34,7 +34,7 @@ This folder is meant to store raw and processed IPCC and ESA data (reports, refe
 ## ESA Climate Change Initiative (CCI) references and projects
 
 - CCI references: 1100 references from 1995 to 2021 (cutoff date for AR6 papers)
-- CCI projects: 29 projects including 26 ECV datasets
+- CCI projects: 31 projects including 26 ECV datasets
 
 ## Coupled Model Intercomparison Project (CMIP)
 
