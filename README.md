@@ -23,8 +23,6 @@ pip install -r requirements.txt
 
 ## Data
 
-# Data information and management
-
 This folder is meant to store raw and processed IPCC and ESA data (reports, references...). It is organised as follows.
 
 ```
@@ -122,9 +120,8 @@ python remove_duplicates.py
 python sanitise_project_names.py
 ```
 
-## Analysis of ESA-IPCC topics : ECVs and references
+## Analysis tools
 
-### Analysis tools
 - Run `terms_in_reports.py` to compute and save search terms count for each chapter
 - Run `references.py` to extract and save the matching CCI & IPCC references
 - Run `references_chapters.py` to add chapter(s) of each matching CCI & IPCC reference
