@@ -1,6 +1,6 @@
 # Analysis of ESA-IPCC topics : ECVs and references
 
-## Foundation analysis
+## Analysis
 - Run `terms_in_reports.py` to compute and save search terms count for each chapter
 - Run `references.py` to extract and save the matching CCI & IPCC references
 - Run `references_chapters.py` to add chapter(s) of each matching CCI & IPCC reference
