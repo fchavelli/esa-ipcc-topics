@@ -1,5 +1,12 @@
-# ESA Climate Office - IPCC analysis
-Analysis of ESA Climate Office topics across last IPCC reports
+# ESA Climate Change Initiative - IPCC analysis
+
+Assessment of ESA Climate Change Initiative (CCI) contribution to IPCC reports and potential to address knowledge gaps in Earth Observation
+
+## Main features
+
+- Analysis of CCI publications across IPCC references
+- Analysis of Essential Climate Variables (ECVs) in IPCC reports
+- Analysis of CCI Earth Observation tools (satellites, sensors, programs) in IPCC reports
 
 ## Installation
 
