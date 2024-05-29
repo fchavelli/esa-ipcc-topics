@@ -133,7 +133,7 @@ python sanitise_project_names.py
 
 Tableau Software is used to visualize results and generate figures. The Tableau Workbooks (.twb) used are stored in `\visualisation`.
 
-| Workbook                  | Figures |
+| Workbook                  | Visualisation |
 | --- | --- |
 | `dataset`                 | CCI datasets used in AR6 WG1 report |
 | `references`              | CCI references & projects in AR6 reports |
