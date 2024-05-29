@@ -120,7 +120,7 @@ python sanitise_project_names.py
 
 ## Analysis
 
-The analysis files are located in `\analysis`. Navigate to this folder and use the command `python` + `script_name.py` to run the scripts.
+The analysis files are located in `\analysis`. Navigate to this folder and use the command `python script_name.py` to run the scripts.
 
 | Tool                           | Usage |
 | --- | --- |
