@@ -10,7 +10,7 @@ Assessment of ESA Climate Change Initiative (CCI) contribution to IPCC reports a
 
 ## Installation
 
-Create a python virtual environment and install the dependencies.
+Create a python virtual environment (Python 3.12) and install the dependencies.
 
 shell
 
@@ -30,7 +30,7 @@ pip install -r requirements.txt
 
 ## Data
 
-This folder is meant to store raw and processed IPCC and ESA data (reports, references...). It is organised as follows.
+Raw and processed IPCC and ESA data (reports, references...) are stored in `\data` folder, organised as follows.
 
 ```
 \data
@@ -44,20 +44,11 @@ This folder is meant to store raw and processed IPCC and ESA data (reports, refe
     \online_references  [ipcc references retrieved online (.xlsx)]
 ```
 
-Download the available reports (.pdf) and references (.bib) from the IPCC website.
-AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
-
-```
-python download_reports.py
-```
-
-Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, Summary for Policymakers (SPM), Technical Summaries (TS), Annexes (A) as well as references can be downloaded manually from the [IPCC website](https://www.ipcc.ch).
-
-## Preprocessing
+## Download & preprocessing
 
 ### IPCC Reports
 
-#### Download PDF
+#### Download PDF & BIB
 
 Download the available reports (.pdf) and references (.bib) from the IPCC website.
 AR6 WG1,2,3 chapters and associated references can be downloaded automatically using the following command.
@@ -70,7 +61,7 @@ Other files including Special Reports (SR) and Synthesis Report (SYR) chapters, 
 
 #### Convert PDF to TXT
 
-Once pdf files are downloaded, they can be converted to txt files using the following command. The text in tables and figures are read when available (e.g. WG1 Chapter 1, Fig 1.1). Note that the process can take a few minutes.
+Once pdf files are downloaded, they can be converted to txt files using the following command. The text in tables and figures are read when possible (e.g. WG1 Chapter 1, Fig 1.1). The process can take a few minutes.
 
 ```
 python ./utils/pdf_to_txt.py
@@ -127,7 +118,7 @@ python remove_duplicates.py
 python sanitise_project_names.py
 ```
 
-## Analysis tools
+## Analysis
 
 - Run `terms_in_reports.py` to compute and save search terms count for each chapter
 - Run `references.py` to extract and save the matching CCI & IPCC references
@@ -135,3 +126,18 @@ python sanitise_project_names.py
 - Run `references_spm.py` to identify matching CCI & IPCC references for each SPM section
 - Run `spm_sections.py` to display CCI references and projects supporting SPM statements
 - Run `references_text_citations.py` to count in-text citations of CCI references in IPCC reports
+
+## Visualisation
+
+Tableau Software is used to visualize results and generate figures. The workbooks / Tableau Workbook (.twb) used are stored under `tableau`.
+
+| Workbook                  | Figures |
+| --- | --- |
+| `dataset`                 | CCI datasets used in AR6 WG1 report |
+| `references`              | CCI references & projects in AR6 reports |
+| `references_chapter`      | CCI references & projects in AR6 report chapters |
+| `wg1_topics`              | Topics of CCI references supporting AR6 WG1 report |
+| `satellite_sensors`       | CCI relevant satellites & sensors in AR6 WG1 report |
+| `terms_ar6`               | Count of search terms (projects, ECVs, ...) in AR6 reports |
+| `terms_ars`               | Count of search terms (projects, ECVs, ...) in AR1 to AR6 |
+| `references_citations`    | Count of CCI-IPCC references citations in the literature |
