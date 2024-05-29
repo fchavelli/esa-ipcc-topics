@@ -129,7 +129,7 @@ python sanitise_project_names.py
 
 ## Visualisation
 
-Tableau Software is used to visualize results and generate figures. The workbooks / Tableau Workbook (.twb) used are stored under `tableau`.
+Tableau Software is used to visualize results and generate figures. The Tableau Workbooks (.twb) used are stored in `\visualisation`.
 
 | Workbook                  | Figures |
 | --- | --- |
