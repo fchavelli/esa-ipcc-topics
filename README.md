@@ -120,12 +120,14 @@ python sanitise_project_names.py
 
 ## Analysis
 
-- Run `terms_in_reports.py` to compute and save search terms count for each chapter
-- Run `references.py` to extract and save the matching CCI & IPCC references
-- Run `references_chapters.py` to add chapter(s) of each matching CCI & IPCC reference
-- Run `references_spm.py` to identify matching CCI & IPCC references for each SPM section
-- Run `spm_sections.py` to display CCI references and projects supporting SPM statements
-- Run `references_text_citations.py` to count in-text citations of CCI references in IPCC reports
+| Tool                           | Usage |
+| --- | --- |
+| `terms_in_reports.py`          | Compute and save search terms count for each chapter |
+| `references.py`                | Extract and save the matching CCI & IPCC references |
+| `references_chapters.py`       | Add chapter(s) of each matching CCI & IPCC reference |
+| `references_spm.py`            | Identify matching CCI & IPCC references for each SPM section |
+| `spm_sections.py`              | Display CCI references and projects supporting SPM statements |
+| `references_text_citations.py` | Count in-text citations of CCI references in IPCC reports |
 
 ## Visualisation
 
